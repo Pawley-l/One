@@ -5,16 +5,16 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(PkgConfig REQUIRED)
 
 file(GLOB_RECURSE SRCS src/*.cpp)
-file(GLOB_RECURSE PROTECT_ONE_SRC Games/ProjectOne/*.cpp)
-file(GLOB_RECURSE TESTS Tests/Units/*.h)
+file(GLOB_RECURSE PROTECT_ONE_SRC games/ProjectOne/*.cpp)
+file(GLOB_RECURSE TESTS tests/Units/*.h)
 
 include_directories(include)
 include_directories(lib)
 
-add_executable(OneTest Tests/main.cpp ${SRCS})
+add_executable(OneTest tests/main.cpp ${SRCS})
 add_library(One ${SRCS})
-add_executable(ProjectOne Games/main.cpp ${PROTECT_ONE_SRC} ${SRCS})
-add_executable(UnitTests Tests/tests_main.cpp ${TESTS} ${SRCS})
+add_executable(ProjectOne games/main.cpp ${PROTECT_ONE_SRC} ${SRCS})
+add_executable(UnitTests tests/tests_main.cpp ${TESTS} ${SRCS})
 
 add_subdirectory(lib/googletest)
 include_directories(lib/googletest/googletest/include)
