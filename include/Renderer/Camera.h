@@ -10,12 +10,17 @@ namespace One::Renderer
 	class Camera
 	{
 	public:
-		void LookAt(glm::vec3 x, glm::vec3 y, glm::vec3 z);
+		Camera();
+		virtual void LookAt(glm::vec3 x, glm::vec3 y, glm::vec3 z);
+		virtual glm::mat4x4 GetProjection(float width, float height);
+		virtual glm::mat4x4 GetView();
+		void SetFov(float fov);
 
-	private:
-		friend BaseRenderer;
+	protected:
+		float m_Fov = 75.f;
 
-		glm::mat4x4 m_ViewMatrix;
+		glm::mat4x4 m_ViewMatrix{};
+		glm::mat4x4 m_ProjectionMatrix{};
 	};
 }
 

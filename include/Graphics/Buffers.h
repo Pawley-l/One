@@ -5,7 +5,7 @@
 #include <Graphics/Texture.h>
 #include <memory>
 #include <vector>
-#include <Common.h>
+#include <One.h>
 
 namespace One::Graphics
 {
@@ -66,6 +66,7 @@ namespace One::Graphics
 		virtual Graphics::Primitives GetPrimitive() = 0;
 		virtual VertexBuffer& operator [](std::size_t index) = 0;
 		virtual const VertexBuffer& operator [](std::size_t index) const = 0;
+		//virtual VertexArray& operator+=(const VertexBuffer& buffer) const = 0;
 		virtual ~VertexArray() = default;
 
 		//virtual std::ostream& operator<<(std::ostream& os, const T& obj) = 0;

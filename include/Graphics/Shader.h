@@ -5,7 +5,7 @@
 #include <Graphics/Types.h>
 #include <memory>
 #include <glm/glm.hpp>
-#include <Common.h>
+#include <One.h>
 
 namespace One::Graphics
 {

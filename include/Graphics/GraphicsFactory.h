@@ -6,7 +6,7 @@
 #include <Graphics/Buffers.h>
 #include <Graphics/Shader.h>
 #include <Graphics/Texture.h>
-#include <Common.h>
+#include <One.h>
 
 #define GRAPHICS_FACTORY One::Graphics::Commands::GetInstance()->GetFactory()
 

@@ -8,10 +8,15 @@
 #include <functional>
 #include <Graphics/Context.h>
 #include <Graphics/Types.h>
-#include <Common.h>
+#include <One.h>
 
 namespace One
 {
+	namespace Renderer
+	{
+		class BaseRenderer;
+	}
+
 	/**
 	 * Window class which is a wrapper around GLFWWindow to make it clean and convenient
 	 */
@@ -20,36 +25,36 @@ namespace One
 	private:
 		// Typedef to make it easier to change in future
 		typedef GLFWwindow *window_impl;
-
-		window_impl m_WindowImpl;
-		One::Graphics::Context *m_Context;
-
 		friend One::Graphics::Context;
 
-		Graphics::API m_GraphicsApi;
+		window_impl m_WindowImpl{};
+		Graphics::Context *m_Context{};
+
+		std::string m_Title;
+		u32 m_Width;
+		u32 m_Height;
+
 	private:
 		std::function<void()> m_InputCallback;
 
 		void InitGraphics(Graphics::API api);
 	public:
-		/**
-		 * Creates window and context of respective graphics api
-		 * @param name - Name of the window
-		 * @param width - Window Width
-		 * @param height - Window height
-		 * @param api - Graphics API
-		 */
-		Window(const std::string &name, u32 width, u32 height, Graphics::API api);
 
 		/**
-		 * Creates window and a OpenGL Context
+		 * Initializes a window and awaits to be started
 		 * @param name - Name of the window
 		 * @param width - Window Width
 		 * @param height - Window height
 		 */
-		Window(const std::string &name, u32 width, u32 height);
+		Window(std::string name, u32 width, u32 height);
 
 		~Window();
+
+		/**
+		 * Starts the window with the renderer
+		 * @param renderer
+		 */
+		void Start(Renderer::BaseRenderer &renderer);
 
 		/**
 		 * Returns true if the window should close

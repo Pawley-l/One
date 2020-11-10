@@ -1,31 +1,17 @@
 #include <Window/Window.h>
 #include <iostream>
+#include <utility>
 #include <Graphics/GL3/GL3Context.h>
 #include <Graphics/Commands.h>
+#include <Renderer/BaseRenderer.h>
+#include <Application/InputManager.h>
 
 void window_size_callback(GLFWwindow* window, int width, int height)
 {
 	One::Graphics::Commands::GetInstance()->SetViewPort(0, 0, width, height);
 }
 
-One::Window::Window(const std::string &name, u32 width, u32 height, Graphics::API api) : m_GraphicsApi(api)
-{
-	glfwInit();
-	m_WindowImpl = glfwCreateWindow(width, height, name.c_str(),nullptr,nullptr);
-
-	if (m_WindowImpl == nullptr)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-	}
-	InitGraphics(api);
-	glfwSwapInterval(1);
-
-	Graphics::Commands::GetInstance()->SetViewPort(0, 0, width, height);
-	glfwSetWindowSizeCallback(m_WindowImpl, window_size_callback);
-}
-
-One::Window::Window(const std::string &name, u32 width, u32 height) : Window(name, width, height, Graphics::API::GL3)
+One::Window::Window(std::string name, u32 width, u32 height) : m_Title(std::move(name)), m_Width(width), m_Height(height)
 {}
 
 One::Window::~Window()
@@ -100,4 +86,22 @@ u32 One::Window::GetWindowHeight()
 	glfwGetWindowSize(m_WindowImpl, &width, &height);
 
 	return height;
+}
+
+void One::Window::Start(One::Renderer::BaseRenderer &renderer)
+{
+	glfwInit();
+	m_WindowImpl = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(),nullptr,nullptr);
+
+	if (m_WindowImpl == nullptr)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+	}
+	InitGraphics(renderer.GetCurrentDevice().GPU.GraphicsAPI);
+	glfwSwapInterval(1);
+
+	Graphics::Commands::GetInstance()->SetViewPort(0, 0, m_Width, m_Height);
+	glfwSetWindowSizeCallback(m_WindowImpl, window_size_callback);
+	glfwSetKeyCallback(m_WindowImpl, reinterpret_cast<GLFWkeyfun>(InputManager::key_callback));
 }

@@ -20,6 +20,8 @@ std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstanceIn
 				break;
 			case API::Vulkan:
 				break;
+			case API::GL2:
+				break;
 		}
 	}
 

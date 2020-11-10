@@ -1,7 +1,7 @@
 #ifndef ONE_BASERENDERER_H
 #define ONE_BASERENDERER_H
 
-#include <Common.h>
+#include <One.h>
 #include <Graphics/Types.h>
 #include <Renderer/Camera.h>
 #include <Graphics/Buffers.h>
@@ -27,6 +27,9 @@ namespace One::Renderer
 				u32 MaxTextures;
 				u32 MaxTextureSize;
 			} Limitations;
+			struct AnalyticsData {
+				u32 DrawCalls;
+			} Analytics;
 		} GPU;
 		struct MonitorData {
 			u32 Width;
@@ -37,13 +40,13 @@ namespace One::Renderer
 	class BaseRenderer
 	{
 	public:
-		BaseRenderer();
+		explicit BaseRenderer(Graphics::API api);
+
+		void InitializeDevice();
 
 		Device GetCurrentDevice();
 
-		void SetFov(float fov);
-
-		void AttachWindow(const std::shared_ptr<One::Window>& window);
+		void AttachWindow(const std::shared_ptr<One::Window> &window);
 
 		virtual void Submit(Graphics::vertex_array_ptr &array);
 
@@ -56,13 +59,13 @@ namespace One::Renderer
 
 	protected:
 		Device m_Device{};
-		glm::mat4 m_ProjectionMatrix;
+		glm::mat4 m_ProjectionMatrix{};
 		glm::mat4 m_ViewMatrix{};
 		std::shared_ptr<Graphics::ShaderProgram> m_CurrentShader;
 		std::shared_ptr<One::Window> m_AttachedWindow;
 		std::queue<Graphics::vertex_array_ptr> m_Queue;
 		std::atomic_bool m_InScene;
-		float m_Fov = 45.f;
+		float m_Fov = 75.f;
 	};
 }
 

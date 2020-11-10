@@ -2,7 +2,7 @@
 #define ONE_GL3TEXTURE2D_H
 
 #include <Graphics/GL3/Texture/GL3Texture.h>
-#include <Common.h>
+#include <One.h>
 
 namespace One::Graphics::GL3
 {

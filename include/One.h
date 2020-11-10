@@ -1,5 +1,5 @@
-#ifndef ONE_COMMON_H
-#define ONE_COMMON_H
+#ifndef ONE_ONE_H
+#define ONE_ONE_H
 
 #include <cstdint>
 #include <string>
@@ -21,4 +21,4 @@ typedef std::string string;
 #define sizeof_32 4;
 #define sizeof_64 8;
 
-#endif //ONE_COMMON_H
+#endif //ONE_ONE_H

@@ -10,13 +10,6 @@ namespace One::Graphics::GL3
 {
 	class GL3VertexBufferArray : public VertexArray
 	{
-	private:
-		GLuint m_BufferID;
-		GLuint m_AttribLocation;
-		GLuint m_VertexCount;
-		GLuint m_IndexCount;
-		GLuint m_TextureIndex = 0;
-		Primitives m_DrawPrimitive;
 		
 	public:
 		void Initialize() override;
@@ -47,6 +40,14 @@ namespace One::Graphics::GL3
 		VertexBuffer &operator[](std::size_t index) override;
 
 		const VertexBuffer &operator[](std::size_t index) const override;
+
+	private:
+		GLuint m_BufferID;
+		GLuint m_AttribLocation;
+		GLuint m_VertexCount;
+		GLuint m_IndexCount;
+		GLuint m_TextureIndex = 0;
+		Primitives m_DrawPrimitive;
 	};
 }
 
