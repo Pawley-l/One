@@ -1,9 +1,15 @@
 #include <Graphics/Commands.h>
 #include <Graphics/GL3/GL3Commands.h>
+#include <iostream>
 
 std::unique_ptr<One::Graphics::Commands> One::Graphics::Commands::m_Instance;
 
-std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstance(One::Graphics::API api)
+std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstance()
+{
+	return m_Instance;
+}
+
+std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstanceInitialize(One::Graphics::API api)
 {
 	if (m_Instance == nullptr)
 	{
@@ -15,9 +21,15 @@ std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstance(O
 			case API::Vulkan:
 				break;
 		}
-
 	}
 
 	return m_Instance;
 }
+
+
+One::Graphics::Commands::Commands()
+{
+	LOG("Graphics Initialized");
+}
+
 

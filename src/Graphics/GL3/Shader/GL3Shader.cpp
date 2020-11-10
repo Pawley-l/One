@@ -15,7 +15,7 @@ void One::Graphics::GL3::GL3Shader::CompileShader(const std::string &code, GLuin
 	if(!success)
 	{
 		glGetShaderInfoLog(id, 512, NULL, infoLog);
-		std::cout << "GL3Shader could not be compiled: \n" << infoLog << std::endl;
+		ERROR(infoLog)
 	};
 }
 

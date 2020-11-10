@@ -8,12 +8,13 @@
 #include <functional>
 #include <Graphics/Context.h>
 #include <Graphics/Types.h>
+#include <Common.h>
 
 namespace One
 {
-/**
- * Window class which is a wrapper around GLFWWindow to make it clean and convenient
- */
+	/**
+	 * Window class which is a wrapper around GLFWWindow to make it clean and convenient
+	 */
 	class Window
 	{
 	private:
@@ -38,7 +39,7 @@ namespace One
 		 * @param height - Window height
 		 * @param api - Graphics API
 		 */
-		Window(const std::string &name, int width, int height, Graphics::API api);
+		Window(const std::string &name, u32 width, u32 height, Graphics::API api);
 
 		/**
 		 * Creates window and a OpenGL Context
@@ -46,7 +47,7 @@ namespace One
 		 * @param width - Window Width
 		 * @param height - Window height
 		 */
-		Window(const std::string &name, int width, int height);
+		Window(const std::string &name, u32 width, u32 height);
 
 		~Window();
 
@@ -90,6 +91,18 @@ namespace One
 		 * @return window_impl&
 		 */
 		window_impl &GetWindowImpl();
+
+		/**
+		 *
+		 * @return
+		 */
+		u32 GetWindowWidth();
+
+		/**
+		 *
+		 * @return
+		 */
+		u32 GetWindowHeight();
 	};
 }
 

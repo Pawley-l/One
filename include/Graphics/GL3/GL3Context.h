@@ -17,7 +17,6 @@ namespace One::Graphics::GL3
 		void InitializeContext() override;
 
 		void SwapBuffers() override;
-
 	};
 }
 

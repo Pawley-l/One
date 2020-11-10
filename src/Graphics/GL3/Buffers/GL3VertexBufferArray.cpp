@@ -1,4 +1,5 @@
 #include <Graphics/GL3/Buffers/GL3VertexBufferArray.h>
+#include <Graphics/GL3/GL3Functions.h>
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
@@ -6,6 +7,7 @@
 void One::Graphics::GL3::GL3VertexBufferArray::Initialize()
 {
 	glGenVertexArrays(1, &m_BufferID);
+	glBindVertexArray(0);
 }
 
 void One::Graphics::GL3::GL3VertexBufferArray::Bind() const
@@ -18,51 +20,75 @@ void One::Graphics::GL3::GL3VertexBufferArray::Unbind() const
 	glBindVertexArray(0);
 }
 
-void One::Graphics::GL3::GL3VertexBufferArray::AddAttribute(int size, One::Graphics::ShaderTypes type, int stride,
-                                                            unsigned int offset, bool normalized)
+void One::Graphics::GL3::GL3VertexBufferArray::AddAttribute(int size, One::Graphics::ShaderTypes type, i32 stride,
+                                                            u32 offset, bool normalized)
 {
-	Bind();
-	switch (type)
-	{
+	glBindVertexArray(m_BufferID);
 
-		case ShaderTypes::Vec:
-			break;
-		case ShaderTypes::Vec2:
-			break;
-		case ShaderTypes::Vec3:
-			break;
-		case ShaderTypes::Vec4:
-			break;
-		case ShaderTypes::Mat2:
-			break;
-		case ShaderTypes::Mat3:
-			break;
-		case ShaderTypes::Mat4:
-			break;
-		case ShaderTypes::Float:
-			glVertexAttribPointer(m_AttribLocation, size, GL_FLOAT, normalized ? GL_TRUE : GL_FALSE,
-			                      stride, (void*)offset);
-			glEnableVertexAttribArray(m_AttribLocation);;
-		case ShaderTypes::Int:
-			glVertexAttribPointer(m_AttribLocation, size, GL_INT, normalized ? GL_TRUE : GL_FALSE,
-			                      stride, (void*)offset);
-			glEnableVertexAttribArray(m_AttribLocation);;;
-	}
+	Functions::VertexAttribPointer(m_AttribLocation, size, type, normalized, stride, (void*)offset);
 
+	glEnableVertexAttribArray(m_AttribLocation);
 
-
-	Unbind();
+	glBindVertexArray(0);
 	m_AttribLocation++;
 }
 
 void One::Graphics::GL3::GL3VertexBufferArray::Add(One::Graphics::index_buffer_ptr &index_buffer)
 {
-
+	auto* new_array = dynamic_cast<GL3IndexBuffer*>(index_buffer.get());
+	m_IndexCount += new_array->m_Count;
+	Bind();
+	new_array->Bind();
+	Unbind();
+	m_IndexBuffers.push_back(index_buffer);
 }
 
 void One::Graphics::GL3::GL3VertexBufferArray::Add(One::Graphics::vertex_buffer_ptr &vertex_buffer)
 {
+	auto* new_array = dynamic_cast<GL3VertexBuffer*>(vertex_buffer.get());
+	m_VertexCount += new_array->m_BufferSize;
+	Bind();
+	new_array->Bind();
+	Unbind();
+	m_VertexBuffers.push_back(vertex_buffer);
+}
 
+unsigned int One::Graphics::GL3::GL3VertexBufferArray::GetVertexCount() const
+{
+	return m_VertexCount;
+}
+
+unsigned int One::Graphics::GL3::GL3VertexBufferArray::GetIndexCount() const
+{
+	return m_IndexCount;
+}
+
+void One::Graphics::GL3::GL3VertexBufferArray::Add(One::Graphics::texture_ptr &texture)
+{
+	Bind();
+	texture->Bind(m_TextureIndex);
+	m_TextureIndex++;
+	Unbind();
+}
+
+void One::Graphics::GL3::GL3VertexBufferArray::SetPrimitive(const One::Graphics::Primitives &primitive)
+{
+	m_DrawPrimitive = primitive;
+}
+
+One::Graphics::Primitives One::Graphics::GL3::GL3VertexBufferArray::GetPrimitive()
+{
+	return m_DrawPrimitive;
+}
+
+One::Graphics::VertexBuffer &One::Graphics::GL3::GL3VertexBufferArray::operator[](std::size_t index)
+{
+	return m_VertexBuffers[index].operator*();
+}
+
+const One::Graphics::VertexBuffer &One::Graphics::GL3::GL3VertexBufferArray::operator[](std::size_t index) const
+{
+	return m_VertexBuffers[index].operator*();
 }
 
 One::Graphics::GL3::GL3VertexBufferArray::~GL3VertexBufferArray()

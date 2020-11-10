@@ -1,26 +1,30 @@
 #include <Graphics/GL3/Buffers/GL3IndexBuffer.h>
+#include <Graphics/GL3/GL3Functions.h>
+#include <iostream>
 
-void One::Graphics::GL3::GL3IndexBuffer::Initialize(unsigned int *indices, unsigned int size)
+void One::Graphics::GL3::GL3IndexBuffer::Initialize(u32 *indices, u32 size)
 {
-	m_Count = size / sizeof(unsigned int);
-	glGenBuffers(1, &m_BufferID);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+	Functions::GenBuffers(1, &m_BufferID);
+	Functions::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID);
+	Functions::BufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, DrawStrategy::Static);
+
+	m_Count = size / sizeof(u32);
+	Functions::BindBuffer(1, m_BufferID);
 }
 
 void One::Graphics::GL3::GL3IndexBuffer::Bind() const
 {
-	glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);
+	Functions::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID);
 }
 
 void One::Graphics::GL3::GL3IndexBuffer::Unbind() const
 {
-	glBindBuffer(1, m_BufferID);
+	Functions::BindBuffer(1, m_BufferID);
 }
 
 One::Graphics::GL3::GL3IndexBuffer::~GL3IndexBuffer()
 {
-	glDeleteBuffers(1, &m_BufferID);
+	Functions::DeleteBuffers(1, &m_BufferID);
 }
 
 unsigned int One::Graphics::GL3::GL3IndexBuffer::GetCount()

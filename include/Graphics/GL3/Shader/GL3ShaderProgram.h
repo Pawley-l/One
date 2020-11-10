@@ -21,6 +21,16 @@ namespace One::Graphics::GL3
 		void Use() const override;
 
 		~GL3ShaderProgram() override;
+
+		void AddUniformVec3(const std::string &name, glm::vec3 &vec) override;
+
+		void AddUniformVec2(const std::string &name, glm::vec2 &vec) override;
+
+		void AddUniformMat4x4(const std::string &name, glm::mat4x4 &mat) override;
+
+		void AddUniformMat3x3(const std::string &name, glm::mat3x3 &mat) override;
+
+		void AddUniformInt(const std::string &name, i32 val) override;
 	};
 }
 

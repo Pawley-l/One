@@ -6,13 +6,17 @@
 
 namespace One::Graphics::GL3
 {
+	class GL3VertexBufferArray;
+
 	class GL3IndexBuffer : public IndexBuffer
 	{
 	private:
 		unsigned int m_Count = 0;
 		GLuint m_BufferID = 0;
+
+		friend GL3VertexBufferArray;
 	public:
-		void Initialize(unsigned int *indices, unsigned int size) override;
+		void Initialize(u32 *indices, u32 size) override;
 
 		void Bind() const override;
 

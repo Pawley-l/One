@@ -5,7 +5,7 @@ namespace One::Graphics
 {
 	enum class API
 	{
-		GL3, Vulkan
+		GL2, GL3, Vulkan
 	};
 
 	enum class Shaders
@@ -26,6 +26,16 @@ namespace One::Graphics
 	enum class Primitives
 	{
 		Triangles, Quads, Points, Lines
+	};
+
+	enum class DrawStrategy
+	{
+		Static, Dynamic
+	};
+
+	enum class TextureTypes
+	{
+		Texture2D
 	};
 }
 
