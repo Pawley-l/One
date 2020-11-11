@@ -6,7 +6,7 @@
 
 namespace One::Graphics::GL3
 {
-	class GL3VertexBufferArray;
+	class GL3BufferArray;
 
 	class GL3VertexBuffer : public One::Graphics::VertexBuffer
 	{
@@ -14,7 +14,7 @@ namespace One::Graphics::GL3
 		GLuint m_BufferID{};
 		GLuint m_BufferSize;
 
-		friend GL3VertexBufferArray;
+		friend GL3BufferArray;
 	public:
 		void Initialize(float *vertices, u32 size) override;
 

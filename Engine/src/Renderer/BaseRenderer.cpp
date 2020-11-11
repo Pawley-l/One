@@ -9,7 +9,7 @@ One::Renderer::Device One::Renderer::BaseRenderer::GetCurrentDevice()
 	return m_Device;
 }
 
-void One::Renderer::BaseRenderer::Submit(One::Graphics::vertex_array_ptr &array)
+void One::Renderer::BaseRenderer::Draw(One::Graphics::vertex_array_ptr &array)
 {
 	m_Queue.push(array);
 }

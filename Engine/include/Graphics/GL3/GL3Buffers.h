@@ -3,6 +3,6 @@
 
 #include <Graphics/GL3/Buffers/GL3VertexBuffer.h>
 #include <Graphics/GL3/Buffers/GL3IndexBuffer.h>
-#include <Graphics/GL3/Buffers/GL3VertexBufferArray.h>
+#include <Graphics/GL3/Buffers/GL3BufferArray.h>
 
 #endif //ONE_GL3BUFFERS_H

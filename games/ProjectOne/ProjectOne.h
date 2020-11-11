@@ -1,6 +1,7 @@
 #ifndef ONE_PROJECTONE_H
 #define ONE_PROJECTONE_H
 
+#include <One.h>
 #include <Application/Application.h>
 #include <Graphics/Buffers.h>
 #include <Renderer/Camera.h>

@@ -5,7 +5,7 @@
 
 One::Graphics::GL3::GL3Commands::GL3Commands()
 {
-	m_Factory = std::unique_ptr<GL3Factory>(new GL3Factory());
+	m_Factory = std::shared_ptr<GL3Factory>(new GL3Factory());
 }
 
 void
@@ -22,7 +22,7 @@ void One::Graphics::GL3::GL3Commands::Clear(float r, float g, float b)
 
 void One::Graphics::GL3::GL3Commands::DrawArray(One::Graphics::vertex_array_ptr &array, One::Graphics::Primitives primitive)
 {
-	auto* new_array = dynamic_cast<GL3VertexBufferArray*>(array.get());
+	auto* new_array = dynamic_cast<GL3BufferArray*>(array.get());
 	new_array->Bind();
 
 	Functions::DrawArrays(primitive, 0, 3);
@@ -31,7 +31,7 @@ void One::Graphics::GL3::GL3Commands::DrawArray(One::Graphics::vertex_array_ptr 
 void One::Graphics::GL3::GL3Commands::DrawElements(One::Graphics::vertex_array_ptr &array,
                                                    One::Graphics::Primitives primitive)
 {
-	auto* new_array = dynamic_cast<GL3VertexBufferArray*>(array.get());
+	auto* new_array = dynamic_cast<GL3BufferArray*>(array.get());
 	new_array->Bind();
 
 	Functions::DrawElements(primitive, new_array->GetIndexCount(), ShaderTypes::Int, 0);

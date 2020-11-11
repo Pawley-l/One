@@ -17,12 +17,13 @@ void One::Graphics::GL3::GL3ShaderProgram::AttachShader(One::Graphics::Shader &s
 
 void One::Graphics::GL3::GL3ShaderProgram::LinkProgram() const
 {
-	int success;
-	char infoLog[1024];
+	int success = 0;
 	glLinkProgram(m_ProgramID);
 	glGetShaderiv(m_ProgramID, GL_COMPILE_STATUS, &success);
+
 	if (!success)
 	{
+		char infoLog[1024] = "";
 		glGetShaderInfoLog(m_ProgramID, 1024, NULL, infoLog);
 		std::cout << infoLog  << std::endl;
 	}
@@ -34,9 +35,7 @@ void One::Graphics::GL3::GL3ShaderProgram::Use() const
 }
 
 One::Graphics::GL3::GL3ShaderProgram::~GL3ShaderProgram()
-{
-
-}
+= default;
 
 void One::Graphics::GL3::GL3ShaderProgram::AddUniformVec3(const std::string &name, glm::vec3 &vec)
 {

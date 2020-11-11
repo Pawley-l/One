@@ -4,6 +4,8 @@
 #include <Renderer/Orth/OrthographicCamera.h>
 #include "ProjectOne.h"
 
+oneIMPLEMENT_APP(ProjectOne)
+
 float vertices[] = {
 	// positions          // colors           // texture coords
 	0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
@@ -19,7 +21,7 @@ u32 indices[] = {  // note that we start from 0!
 void ProjectOne::Startup()
 {
 	m_ShaderProgram = One::Graphics::shader_program_ptr (GRAPHICS_COMMANDS->GetFactory().CreateShaderProgram());
-	m_Camera = std::make_shared<One::Renderer::Orth::OrthographicCamera>();
+	m_Camera = std::make_shared<One::Renderer::Camera>();
 	m_VertexBuffer = One::Graphics::vertex_buffer_ptr (GRAPHICS_FACTORY.CreateVertexBuffer(vertices, sizeof(vertices)));
 	m_IndexBuffer = One::Graphics::index_buffer_ptr (GRAPHICS_FACTORY.CreateIndexBuffer(indices, sizeof(indices)));
 	m_VertexArray = One::Graphics::vertex_array_ptr (GRAPHICS_FACTORY.CreateBufferArray());
@@ -99,7 +101,7 @@ void ProjectOne::ProcessFrame()
 		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 
 	renderer->SceneBegin(m_Camera, m_ShaderProgram);
-	renderer->Submit(m_VertexArray);
+	renderer->Draw(m_VertexArray);
 	renderer->SceneEnd();
 
 	m_Camera->LookAt(cameraPos, cameraPos + cameraFront, cameraUp);

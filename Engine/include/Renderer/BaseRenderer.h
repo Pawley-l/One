@@ -48,7 +48,7 @@ namespace One::Renderer
 
 		void AttachWindow(const std::shared_ptr<One::Window> &window);
 
-		virtual void Submit(Graphics::vertex_array_ptr &array);
+		virtual void Draw(Graphics::vertex_array_ptr &array);
 
 		virtual void SceneBegin(const std::shared_ptr<One::Renderer::Camera>& camera,
 		                        const std::shared_ptr<Graphics::ShaderProgram>& shader);

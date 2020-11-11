@@ -15,7 +15,7 @@ namespace One::Graphics
 
 	enum class Buffers
 	{
-		Vertex, Index
+		Vertex, Index, Frame
 	};
 
 	enum class ShaderTypes

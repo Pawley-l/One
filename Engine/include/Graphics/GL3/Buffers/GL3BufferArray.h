@@ -1,14 +1,15 @@
-#ifndef ONE_GL3VERTEXBUFFERARRAY_H
-#define ONE_GL3VERTEXBUFFERARRAY_H
+#ifndef ONE_GL3BUFFERARRAY_H
+#define ONE_GL3BUFFERARRAY_H
 
 #include <Graphics/Buffers.h>
+#include <Graphics/Array.h>
 #include <Graphics/Types.h>
 #include <Graphics/GL3/GL3Buffers.h>
 #include <GL/glew.h>
 
 namespace One::Graphics::GL3
 {
-	class GL3VertexBufferArray : public VertexArray
+	class GL3BufferArray : public VertexArray
 	{
 		
 	public:
@@ -18,7 +19,7 @@ namespace One::Graphics::GL3
 
 		void Unbind() const override;
 
-		~GL3VertexBufferArray() override;
+		~GL3BufferArray() override;
 
 		void
 		AddAttribute(int size, ShaderTypes type, i32 stride, u32 offset, bool normalized) override;
@@ -51,4 +52,4 @@ namespace One::Graphics::GL3
 	};
 }
 
-#endif //ONE_GL3VERTEXBUFFERARRAY_H
+#endif //ONE_GL3BUFFERARRAY_H

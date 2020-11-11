@@ -21,4 +21,13 @@ typedef std::string string;
 #define sizeof_32 4;
 #define sizeof_64 8;
 
+#define oneIMPLEMENT_APP(X)                             \
+int main()                                              \
+{                                                       \
+	X project;                                      \
+	project.StartApplication();                     \
+							\
+	return 0;                                       \
+}
+
 #endif //ONE_ONE_H

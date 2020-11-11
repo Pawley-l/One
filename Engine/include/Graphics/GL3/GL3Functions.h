@@ -26,9 +26,9 @@ namespace One::Graphics::GL3::Functions
 	void DeleteBuffers(unsigned int n, unsigned int* buffers);
 	void VertexAttribPointer(unsigned int location, unsigned int size, One::Graphics::ShaderTypes type,
 			  bool normalized, unsigned int stride, void* offset);
-	void EnableVertexAttribArray();
-	void BindVertexArray();
-	void GenVertexArrays();
+//	void EnableVertexAttribArray();
+//	void BindVertexArray();
+//	void GenVertexArrays();
 	void DrawElements(One::Graphics::Primitives primitive,
 		   unsigned int count, One::Graphics::ShaderTypes type, unsigned int indices);
 }
