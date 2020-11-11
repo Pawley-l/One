@@ -1,4 +1,4 @@
-#include <Graphics/GL3/Shader/GL3FragmentShader.h>
+#include <Graphics/GL3/GL3FragmentShader.h>
 
 void One::Graphics::GL3::GL3FragmentShader::LoadFromFile(const std::string &file)
 {

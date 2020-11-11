@@ -1,4 +1,4 @@
-#include <Graphics/GL3/Buffers/GL3IndexBuffer.h>
+#include <Graphics/GL3/GL3IndexBuffer.h>
 #include <Graphics/GL3/GL3Functions.h>
 #include <iostream>
 

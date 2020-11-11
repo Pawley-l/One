@@ -28,9 +28,9 @@ namespace One::Graphics::GL3
 
 		void Add(vertex_buffer_ptr &vertex_buffer) override;
 
-		unsigned int GetVertexCount() const;
+		[[nodiscard]] unsigned int GetVertexCount() const;
 
-		unsigned int GetIndexCount() const;
+		[[nodiscard]] unsigned int GetIndexCount() const;
 
 		void Add(texture_ptr &texture) override;
 

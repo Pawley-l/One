@@ -1,4 +1,4 @@
-#include <Graphics/GL3/Texture/GL3Texture.h>
+#include <Graphics/GL3/GL3Texture.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 #include <iostream>

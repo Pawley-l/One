@@ -1,4 +1,4 @@
-#include <Graphics/GL3/Buffers/GL3BufferArray.h>
+#include <Graphics/GL3/GL3BufferArray.h>
 #include <Graphics/GL3/GL3Functions.h>
 
 #pragma clang diagnostic push

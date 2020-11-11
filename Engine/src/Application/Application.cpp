@@ -3,7 +3,7 @@
 void One::Application::StartApplication()
 {
 	window = std::make_shared<One::Window>("Window", 1280, 720);
-	renderer = std::make_shared<One::Renderer::BaseRenderer>(One::Graphics::API::GL3);
+	renderer = std::make_shared<One::Renderer::Orth::Base2DRenderer>(One::Graphics::API::GL3);
 
 	window->Start(*renderer);
 	renderer->InitializeDevice();
@@ -11,8 +11,7 @@ void One::Application::StartApplication()
 
 	this->Startup();
 
-	while (!window->ShouldClose())
-	{
+	while (!window->ShouldClose()) {
 		window->PollEvents();
 		window->Clear();
 

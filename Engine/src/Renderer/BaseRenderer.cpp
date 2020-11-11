@@ -17,7 +17,8 @@ void One::Renderer::BaseRenderer::Draw(One::Graphics::vertex_array_ptr &array)
 void One::Renderer::BaseRenderer::SceneBegin(const std::shared_ptr<One::Renderer::Camera>& camera,
                                              const std::shared_ptr<Graphics::ShaderProgram>& shader)
 {
-	m_ProjectionMatrix = camera->GetProjection(m_AttachedWindow->GetWindowWidth(), m_AttachedWindow->GetWindowHeight());
+	m_ProjectionMatrix = camera->GetProjection(m_AttachedWindow->GetWindowWidth(),
+	                                           m_AttachedWindow->GetWindowHeight());
 	m_ViewMatrix = camera->GetView();
 	m_CurrentShader = shader;
 	m_InScene = true;
@@ -30,22 +31,26 @@ void One::Renderer::BaseRenderer::SceneEnd()
 
 void One::Renderer::BaseRenderer::Flush()
 {
-	if (!m_InScene)
-		if (!m_Queue.empty())
-		{
+	if (!m_InScene) {
+		// Sets the analytics
+		m_Device.GPU.Analytics.DrawCalls = m_Queue.size();
+
+		if (!m_Queue.empty()) {
+			glm::mat4 model = glm::mat4(1.0f);
+//			model = glm::translate( model, glm::vec3( 0.0f, 52.0f, 0.0f ));
+			model = glm::scale(model, glm::vec3(100.0f, 100.0f, 0.0f));
+
 			m_CurrentShader->Use();
 			m_CurrentShader->AddUniformMat4x4("view", m_ViewMatrix);
 			m_CurrentShader->AddUniformMat4x4("projection", m_ProjectionMatrix);
-
-			glm::mat4 model = glm::mat4(1.0f);
 			m_CurrentShader->AddUniformMat4x4("model", model);
 
-			while (!m_Queue.empty())
-			{
+			while (!m_Queue.empty()) {
 				GRAPHICS_COMMANDS->DrawElements(m_Queue.front(), m_Queue.front()->GetPrimitive());
 				m_Queue.pop();
 			}
 		}
+	}
 }
 
 One::Renderer::BaseRenderer::BaseRenderer(One::Graphics::API api)

@@ -1,4 +1,4 @@
-#include <Graphics/GL3/Shader/GL3Shader.h>
+#include <Graphics/GL3/GL3Shader.h>
 #include <sstream>
 
 void One::Graphics::GL3::GL3Shader::CompileShader(const std::string &code, GLuint id)
@@ -8,13 +8,12 @@ void One::Graphics::GL3::GL3Shader::CompileShader(const std::string &code, GLuin
 	int success;
 	char infoLog[512];
 
-	glShaderSource(id, 1, &c_str, NULL);
+	glShaderSource(id, 1, &c_str, nullptr);
 	glCompileShader(id);
 
 	glGetShaderiv(id, GL_COMPILE_STATUS, &success);
-	if(!success)
-	{
-		glGetShaderInfoLog(id, 512, NULL, infoLog);
+	if (!success) {
+		glGetShaderInfoLog(id, 512, nullptr, infoLog);
 		ERROR(infoLog)
 	};
 }

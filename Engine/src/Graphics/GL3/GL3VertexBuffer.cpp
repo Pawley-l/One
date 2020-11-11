@@ -1,4 +1,4 @@
-#include <Graphics/GL3/Buffers/GL3VertexBuffer.h>
+#include <Graphics/GL3/GL3VertexBuffer.h>
 #include <Graphics/GL3/GL3Functions.h>
 #include <iostream>
 

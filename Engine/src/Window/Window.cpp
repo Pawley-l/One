@@ -103,5 +103,8 @@ void One::Window::Start(One::Renderer::BaseRenderer &renderer)
 
 	Graphics::Commands::GetInstance()->SetViewPort(0, 0, m_Width, m_Height);
 	glfwSetWindowSizeCallback(m_WindowImpl, window_size_callback);
+
 	glfwSetKeyCallback(m_WindowImpl, reinterpret_cast<GLFWkeyfun>(InputManager::key_callback));
+	glfwSetMouseButtonCallback(m_WindowImpl,
+	                           reinterpret_cast<GLFWmousebuttonfun>(InputManager::mouse_button_callback));
 }

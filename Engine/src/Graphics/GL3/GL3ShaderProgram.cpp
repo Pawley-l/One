@@ -1,5 +1,5 @@
-#include <Graphics/GL3/Shader/GL3ShaderProgram.h>
-#include <Graphics/GL3/Shader/GL3Shader.h>
+#include <Graphics/GL3/GL3ShaderProgram.h>
+#include <Graphics/GL3/GL3Shader.h>
 #include <glm/glm.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
@@ -21,11 +21,10 @@ void One::Graphics::GL3::GL3ShaderProgram::LinkProgram() const
 	glLinkProgram(m_ProgramID);
 	glGetShaderiv(m_ProgramID, GL_COMPILE_STATUS, &success);
 
-	if (!success)
-	{
+	if (!success) {
 		char infoLog[1024] = "";
-		glGetShaderInfoLog(m_ProgramID, 1024, NULL, infoLog);
-		std::cout << infoLog  << std::endl;
+		glGetShaderInfoLog(m_ProgramID, 1024, nullptr, infoLog);
+		std::cout << infoLog << std::endl;
 	}
 }
 

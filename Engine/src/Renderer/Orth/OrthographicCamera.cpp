@@ -10,12 +10,23 @@ void One::Renderer::Orth::OrthographicCamera::LookAt(glm::vec3 x, glm::vec3 y, g
 
 glm::mat4x4 One::Renderer::Orth::OrthographicCamera::GetProjection(float width, float height)
 {
-	m_ProjectionMatrix = glm::ortho<float>(0, 0, width, height, 0.1f, 100.0f);
+	m_ProjectionMatrix = glm::ortho(-(width / 2), width / 2, height / 2, -(height / 2), 0.0f, 10.f);
 
 	return m_ProjectionMatrix;
 }
 
 glm::mat4x4 One::Renderer::Orth::OrthographicCamera::GetView()
 {
-	return Camera::GetView();
+	return m_ViewMatrix;
+}
+
+void One::Renderer::Orth::OrthographicCamera::Move(float x, float y)
+{
+	m_ViewMatrix = glm::translate(m_ViewMatrix, {y, x, 0});
+
+//	m_ViewMatrix = glm::lookAt(
+//		glm::vec3(0,0,5), // Camera is at (0,0,5), in World Space
+//		glm::vec3(x,y,5), // and looks at the origin
+//		glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+//	);
 }

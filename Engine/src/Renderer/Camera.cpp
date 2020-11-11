@@ -16,7 +16,7 @@ void One::Renderer::Camera::SetFov(float fov)
 
 glm::mat4x4 One::Renderer::Camera::GetProjection(float width, float height)
 {
-	m_ProjectionMatrix = glm::perspective(glm::radians(m_Fov),width / height, 0.1f, 100.0f);
+	m_ProjectionMatrix = glm::perspective(glm::radians(m_Fov), width / height, 0.1f, 100.0f);
 
 	return m_ProjectionMatrix;
 }
@@ -24,6 +24,11 @@ glm::mat4x4 One::Renderer::Camera::GetProjection(float width, float height)
 glm::mat4x4 One::Renderer::Camera::GetView()
 {
 	return m_ViewMatrix;
+}
+
+void One::Renderer::Camera::Move(float x, float y)
+{
+
 }
 
 One::Renderer::Camera::Camera()
