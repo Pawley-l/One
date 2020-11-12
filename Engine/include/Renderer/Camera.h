@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-namespace One::Renderer
+namespace One
 {
 	class BaseRenderer;
 

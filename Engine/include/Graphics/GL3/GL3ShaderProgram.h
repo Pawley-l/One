@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <Graphics/Shader.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3ShaderProgram : public ShaderProgram
 	{

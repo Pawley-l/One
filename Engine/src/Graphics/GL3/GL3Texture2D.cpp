@@ -1,22 +1,22 @@
 #include <Graphics/GL3/GL3Texture2D.h>
 #include <GL/glew.h>
 
-void One::Graphics::GL3::GL3Texture2D::Initialize()
+void One::GL3::GL3Texture2D::Initialize()
 {
 	glCreateTextures(GL_TEXTURE_2D, 1, &m_TextureID);
 }
 
-void One::Graphics::GL3::GL3Texture2D::Bind(u32 id)
+void One::GL3::GL3Texture2D::Bind(u32 id)
 {
 	glBindTextureUnit(id, m_TextureID);
 }
 
-void One::Graphics::GL3::GL3Texture2D::Unbind()
+void One::GL3::GL3Texture2D::Unbind()
 {
 	glBindTextureUnit(0, m_TextureID);
 }
 
-void One::Graphics::GL3::GL3Texture2D::InitializeTexture()
+void One::GL3::GL3Texture2D::InitializeTexture()
 {
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -24,7 +24,7 @@ void One::Graphics::GL3::GL3Texture2D::InitializeTexture()
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-void One::Graphics::GL3::GL3Texture2D::LoadTexture(unsigned char *data)
+void One::GL3::GL3Texture2D::LoadTexture(unsigned char *data)
 {
 	Initialize();
 	glTextureStorage2D(m_TextureID, 1, GL_RGBA8, m_Width, m_Height);

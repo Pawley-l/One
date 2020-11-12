@@ -2,25 +2,23 @@
 #include <Graphics/GL3/GL3Commands.h>
 #include <iostream>
 
-std::unique_ptr<One::Graphics::Commands> One::Graphics::Commands::m_Instance;
+std::unique_ptr<One::Commands> One::Commands::m_Instance;
 
-std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstance()
+std::unique_ptr<One::Commands> &One::Commands::GetInstance()
 {
 	return m_Instance;
 }
 
-std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstanceInitialize(One::Graphics::API api)
+std::unique_ptr<One::Commands> &One::Commands::GetInstanceInitialize(One::GraphicsAPI api)
 {
-	if (m_Instance == nullptr)
-	{
-		switch (api)
-		{
-			case API::GL3:
-				m_Instance = std::unique_ptr<One::Graphics::Commands>(new GL3::GL3Commands());
+	if (m_Instance == nullptr) {
+		switch (api) {
+			case GraphicsAPI::GL3:
+				m_Instance = std::unique_ptr<One::Commands>(new GL3::GL3Commands());
 				break;
-			case API::Vulkan:
+			case GraphicsAPI::Vulkan:
 				break;
-			case API::GL2:
+			case GraphicsAPI::GL2:
 				break;
 		}
 	}
@@ -28,10 +26,10 @@ std::unique_ptr<One::Graphics::Commands> &One::Graphics::Commands::GetInstanceIn
 	return m_Instance;
 }
 
-
-One::Graphics::Commands::Commands()
+One::Commands::Commands()
 {
 	LOG("Graphics Initialized");
 }
+
 
 

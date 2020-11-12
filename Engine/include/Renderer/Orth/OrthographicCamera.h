@@ -3,9 +3,9 @@
 
 #include <Renderer/Camera.h>
 
-namespace One::Renderer::Orth
+namespace One
 {
-	class OrthographicCamera : public One::Renderer::Camera
+	class OrthographicCamera : public One::Camera
 	{
 	public:
 		void Move(float x, float y) override;

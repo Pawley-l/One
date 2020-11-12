@@ -12,10 +12,7 @@
 
 namespace One
 {
-	namespace Renderer
-	{
-		class BaseRenderer;
-	}
+	class BaseRenderer;
 
 	/**
 	 * Window class which is a wrapper around GLFWWindow to make it clean and convenient
@@ -25,10 +22,10 @@ namespace One
 	private:
 		// Typedef to make it easier to change in future
 		typedef GLFWwindow *window_impl;
-		friend One::Graphics::Context;
+		friend One::Context;
 
 		window_impl m_WindowImpl{};
-		Graphics::Context *m_Context{};
+		Context *m_Context{};
 
 		std::string m_Title;
 		u32 m_Width;
@@ -37,7 +34,8 @@ namespace One
 	private:
 		std::function<void()> m_InputCallback;
 
-		void InitGraphics(Graphics::API api);
+		void InitGraphics(GraphicsAPI api);
+
 	public:
 
 		/**
@@ -54,7 +52,7 @@ namespace One
 		 * Starts the window with the renderer
 		 * @param renderer
 		 */
-		void Start(Renderer::BaseRenderer &renderer);
+		void Start(BaseRenderer &renderer);
 
 		/**
 		 * Returns true if the window should close
@@ -76,7 +74,7 @@ namespace One
 		/**
 		 * Clears the screen with the default screen clear colour
 		 */
-		void Clear();
+		static void Clear();
 
 		/**
 		 * Clears the screen with the input colour
@@ -84,12 +82,12 @@ namespace One
 		 * @param g - Green
 		 * @param b - Blue
 		 */
-		void Clear(float r, float g, float b);
+		static void Clear(float r, float g, float b);
 
 		/**
 		 * Polls the window events
 		 */
-		void PollEvents();
+		static void PollEvents();
 
 		/**
 		 * Gets the window implementation

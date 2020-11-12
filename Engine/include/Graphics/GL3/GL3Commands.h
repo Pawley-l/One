@@ -3,7 +3,7 @@
 
 #include <Graphics/Commands.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3Commands : public Commands
 	{
@@ -14,9 +14,9 @@ namespace One::Graphics::GL3
 
 		void Clear(float r, float g, float b) override;
 
-		void DrawArray(vertex_array_ptr &array, One::Graphics::Primitives primitive) override;
+		void DrawArray(vertex_array_ptr &array, One::Primitives primitive) override;
 
-		void DrawElements(vertex_array_ptr &array, One::Graphics::Primitives primitive) override;
+		void DrawElements(vertex_array_ptr &array, One::Primitives primitive) override;
 
 		u32 GetVendorID() override;
 

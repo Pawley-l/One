@@ -4,7 +4,7 @@
 #include <Graphics/Buffers.h>
 #include <GL/glew.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3BufferArray;
 

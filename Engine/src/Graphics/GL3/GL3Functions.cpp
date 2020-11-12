@@ -1,10 +1,9 @@
 #include <Graphics/GL3/GL3Functions.h>
 #include <any>
 
-void One::Graphics::GL3::Functions::DrawArrays(One::Graphics::Primitives primitive, unsigned int first, unsigned int count)
+void One::GL3::Functions::DrawArrays(One::Primitives primitive, unsigned int first, unsigned int count)
 {
-	switch (primitive)
-	{
+	switch (primitive) {
 		case Primitives::Triangles:
 			glDrawArrays(GL_TRIANGLES, first, count);
 		case Primitives::Quads:
@@ -16,36 +15,35 @@ void One::Graphics::GL3::Functions::DrawArrays(One::Graphics::Primitives primiti
 	}
 }
 
-void One::Graphics::GL3::Functions::ClearColour(float r, float g, float b, float a)
+void One::GL3::Functions::ClearColour(float r, float g, float b, float a)
 {
 	glClearColor(r, g, b, a);
 }
 
-void One::Graphics::GL3::Functions::Clear(unsigned int mask)
+void One::GL3::Functions::Clear(unsigned int mask)
 {
 	glClear(mask);
 }
 
-void One::Graphics::GL3::Functions::Viewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+void One::GL3::Functions::Viewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
 {
 	glViewport(x, y, width, height);
 }
 
-void One::Graphics::GL3::Functions::GenBuffers(unsigned int n, unsigned int *buffers)
+void One::GL3::Functions::GenBuffers(unsigned int n, unsigned int *buffers)
 {
 	glGenBuffers(n, buffers);
 }
 
-void One::Graphics::GL3::Functions::BindBuffer(unsigned int type, unsigned int id)
+void One::GL3::Functions::BindBuffer(unsigned int type, unsigned int id)
 {
 	glBindBuffer(type, id);
 }
 
-void One::Graphics::GL3::Functions::BufferData(unsigned int type, unsigned int size, void *data,
-                                               One::Graphics::DrawStrategy usage)
+void One::GL3::Functions::BufferData(unsigned int type, unsigned int size, void *data,
+                                     One::DrawStrategy usage)
 {
-	switch (usage)
-	{
+	switch (usage) {
 		case DrawStrategy::Static:
 			glBufferData(type, size, data, GL_STATIC_DRAW);
 			break;
@@ -55,17 +53,16 @@ void One::Graphics::GL3::Functions::BufferData(unsigned int type, unsigned int s
 	}
 }
 
-void One::Graphics::GL3::Functions::DeleteBuffers(unsigned int n, unsigned int *buffers)
+void One::GL3::Functions::DeleteBuffers(unsigned int n, unsigned int *buffers)
 {
 	glDeleteBuffers(n, buffers);
 }
 
-void One::Graphics::GL3::Functions::VertexAttribPointer(unsigned int location, unsigned int size,
-                                                        One::Graphics::ShaderTypes type, bool normalized,
-                                                        unsigned int stride, void *offset)
+void One::GL3::Functions::VertexAttribPointer(unsigned int location, unsigned int size,
+                                              One::ShaderTypes type, bool normalized,
+                                              unsigned int stride, void *offset)
 {
-	switch (type)
-	{
+	switch (type) {
 		case ShaderTypes::Vec:
 			break;
 		case ShaderTypes::Vec2:
@@ -82,28 +79,27 @@ void One::Graphics::GL3::Functions::VertexAttribPointer(unsigned int location, u
 			break;
 		case ShaderTypes::Float:
 			glVertexAttribPointer(location, size, GL_FLOAT, !normalized ? GL_TRUE : GL_FALSE,
-			                      stride, std::any_cast<void *>(offset));
+			                      stride, offset);
 			break;
 		case ShaderTypes::Int:
 			glVertexAttribPointer(location, size, GL_INT, !normalized ? GL_TRUE : GL_FALSE,
-			                      stride, std::any_cast<void *>(offset));
+			                      stride, offset);
 			break;
 	}
 
 }
 
-void One::Graphics::GL3::Functions::DrawElements(One::Graphics::Primitives primitive, unsigned int count,
-                                                 One::Graphics::ShaderTypes type, unsigned int indices)
+void One::GL3::Functions::DrawElements(One::Primitives primitive, unsigned int count,
+                                       One::ShaderTypes type, unsigned int indices)
 {
 	// TODO: Convert shader type
-	switch (primitive)
-	{
+	switch (primitive) {
 
 		case Primitives::Triangles:
-			glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void*) indices);
+			glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void *) indices);
 			break;
 		case Primitives::Points:
-			glDrawElements(GL_POINTS, count, GL_UNSIGNED_INT, (void*) indices);
+			glDrawElements(GL_POINTS, count, GL_UNSIGNED_INT, (void *) indices);
 			break;
 		case Primitives::Lines:
 			glDrawElements(GL_LINES, count, GL_UNSIGNED_INT, (void*) indices);

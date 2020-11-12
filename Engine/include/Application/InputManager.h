@@ -4,12 +4,10 @@
 #include <memory>
 #include <One.h>
 
-namespace One {
-	class Window;
-}
-
 namespace One
 {
+	class Window;
+
 	class InputManager
 	{
 	public:

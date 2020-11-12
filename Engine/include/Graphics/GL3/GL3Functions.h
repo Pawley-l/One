@@ -15,23 +15,32 @@
 			glGenVertexArrays(1, &m_BufferID);
  */
 
-namespace One::Graphics::GL3::Functions
+namespace One::GL3::Functions
 {
-	void DrawArrays(One::Graphics::Primitives primitive, unsigned int first, unsigned int count);
+	void DrawArrays(One::Primitives primitive, unsigned int first, unsigned int count);
+
 	void ClearColour(float r, float g, float b, float a);
+
 	void Clear(unsigned int mask);
+
 	void Viewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
-	void GenBuffers(unsigned int n, unsigned int* buffers);
+
+	void GenBuffers(unsigned int n, unsigned int *buffers);
+
 	void BindBuffer(unsigned int type, unsigned int id);
-	void BufferData(unsigned int type, unsigned int size, void * data, DrawStrategy usage);
-	void DeleteBuffers(unsigned int n, unsigned int* buffers);
-	void VertexAttribPointer(unsigned int location, unsigned int size, One::Graphics::ShaderTypes type,
-			  bool normalized, unsigned int stride, void* offset);
+
+	void BufferData(unsigned int type, unsigned int size, void *data, DrawStrategy usage);
+
+	void DeleteBuffers(unsigned int n, unsigned int *buffers);
+
+	void VertexAttribPointer(unsigned int location, unsigned int size, One::ShaderTypes type,
+	                         bool normalized, unsigned int stride, void *offset);
+
 //	void EnableVertexAttribArray();
 //	void BindVertexArray();
 //	void GenVertexArrays();
-	void DrawElements(One::Graphics::Primitives primitive,
-		   unsigned int count, One::Graphics::ShaderTypes type, unsigned int indices);
+	void DrawElements(One::Primitives primitive,
+	                  unsigned int count, One::ShaderTypes type, unsigned int indices);
 }
 
 #endif //ONE_GL3FUNCTIONS_H

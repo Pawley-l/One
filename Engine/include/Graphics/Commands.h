@@ -6,20 +6,20 @@
 #include <Graphics/GraphicsFactory.h>
 #include <memory>
 
-#define GRAPHICS_COMMANDS One::Graphics::Commands::GetInstance()
+#define GRAPHICS_COMMANDS One::Commands::GetInstance()
 
 namespace One
 {
 	class Window;
 }
 
-namespace One::Graphics
+namespace One
 {
 	/**
-	 * Graphics API Command class - Contains all abstracted commands and a graphics factory set to the correct api.
+	 * Graphics GraphicsAPI Command class - Contains all abstracted commands and a graphics factory set to the correct api.
 	 * Whatever initializes the instance first ends up being the graphics api for it's whole life.
 	 *
-	 * Only friend classes can Initialize the graphics API.
+	 * Only friend classes can Initialize the graphics GraphicsAPI.
 	 * @friend Window
 	 */
 	class Commands
@@ -53,14 +53,14 @@ namespace One::Graphics
 		 * @param array
 		 * @param primitive
 		 */
-		virtual void DrawArray(vertex_array_ptr &array, One::Graphics::Primitives primitive) =0;
+		virtual void DrawArray(vertex_array_ptr &array, One::Primitives primitive) = 0;
 
 		/**
 		 * Draws a indexed array
 		 * @param array
 		 * @param primitive
 		 */
-		virtual void DrawElements(vertex_array_ptr &array, One::Graphics::Primitives primitive) = 0;
+		virtual void DrawElements(vertex_array_ptr &array, One::Primitives primitive) = 0;
 
 		/**
 		 * Returns the vendor id
@@ -108,15 +108,17 @@ namespace One::Graphics
 		}
 
 	private:
-		static std::unique_ptr <Commands> m_Instance;
-		static std::unique_ptr <Commands> &GetInstanceInitialize(API api = API::GL3);
+		static std::unique_ptr<Commands> m_Instance;
+
+		static std::unique_ptr<Commands> &GetInstanceInitialize(GraphicsAPI api = GraphicsAPI::GL3);
+
 	public:
 		/**
 		 * Gets the current instance
 		 * @return instance
 		 * @warning GetInstanceInitialize() needs to be called first by a friend class
 		 */
-		static std::unique_ptr <Commands> &GetInstance();
+		static std::unique_ptr<Commands> &GetInstance();
 	};
 }
 

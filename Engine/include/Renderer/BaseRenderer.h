@@ -12,7 +12,7 @@
 #include <queue>
 #include <atomic>
 
-namespace One::Renderer
+namespace One
 {
 	/**
 	 * Contains all information about the device this is being rendered on.
@@ -28,7 +28,7 @@ namespace One::Renderer
 			u32 DeviceID;
 			std::string VendorString;
 			std::string RendererDeviceString;
-			One::Graphics::API GraphicsAPI;
+			One::GraphicsAPI GraphicsAPI;
 			struct LimitsData
 			{
 				u32 MaxTextures;
@@ -59,7 +59,7 @@ namespace One::Renderer
 		 * Initializes the renderer with the api.
 		 * @param api
 		 */
-		explicit BaseRenderer(Graphics::API api);
+		explicit BaseRenderer(GraphicsAPI api);
 
 		/**
 		 * Initializes the device it will be rendered on
@@ -82,7 +82,7 @@ namespace One::Renderer
 		 * Adds a vertex array to its render queue
 		 * @param array
 		 */
-		virtual void Draw(Graphics::vertex_array_ptr &array);
+		virtual void Draw(vertex_array_ptr &array);
 
 		/**
 		 * Starts a scene with a camera and shader
@@ -92,27 +92,27 @@ namespace One::Renderer
 		 * @warning only one scene per draw call currently
 		 * @warning Needs to be attached to a window
 		 */
-		virtual void SceneBegin(const std::shared_ptr<One::Renderer::Camera> &camera,
-		                        const std::shared_ptr<Graphics::ShaderProgram> &shader);
+		virtual void SceneBegin(const std::shared_ptr<One::Camera> &camera,
+		                        const std::shared_ptr<ShaderProgram> &shader);
 
 		/**
 		 * Ends the current scene
 		 */
 		virtual void SceneEnd();
 
-	protected:
-
 		/**
 		 * Flushes all of the draw calls from all scenes
 		 */
 		virtual void Flush();
 
+	protected:
+
 		Device m_Device{};
 		glm::mat4 m_ProjectionMatrix{};
 		glm::mat4 m_ViewMatrix{};
-		std::shared_ptr<Graphics::ShaderProgram> m_CurrentShader;
+		std::shared_ptr<ShaderProgram> m_CurrentShader;
 		std::shared_ptr<One::Window> m_AttachedWindow;
-		std::queue<Graphics::vertex_array_ptr> m_Queue;
+		std::queue<vertex_array_ptr> m_Queue;
 		std::atomic_bool m_InScene;
 		float m_Fov = 75.f;
 	};

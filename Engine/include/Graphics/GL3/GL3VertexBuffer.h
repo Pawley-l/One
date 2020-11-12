@@ -4,11 +4,11 @@
 #include <Graphics/Buffers.h>
 #include <GL/glew.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3BufferArray;
 
-	class GL3VertexBuffer : public One::Graphics::VertexBuffer
+	class GL3VertexBuffer : public One::VertexBuffer
 	{
 	private:
 		GLuint m_BufferID{};

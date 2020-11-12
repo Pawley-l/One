@@ -1,7 +1,6 @@
 #ifndef ONE_APPLICATION_H
 #define ONE_APPLICATION_H
 
-#include <Renderer/Orth/Base2DRenderer.h>
 #include <Renderer/BaseRenderer.h>
 #include <Window/Window.h>
 
@@ -22,7 +21,7 @@ namespace One
 		virtual void ProcessFrame() = 0;
 
 	protected:
-		std::shared_ptr<Renderer::Orth::Base2DRenderer> renderer;
+		std::shared_ptr<BaseRenderer> renderer;
 		std::shared_ptr<Window> window;
 	};
 }

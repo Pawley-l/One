@@ -2,20 +2,19 @@
 #include <Graphics/Commands.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
-One::Renderer::Device One::Renderer::BaseRenderer::GetCurrentDevice()
+One::Device One::BaseRenderer::GetCurrentDevice()
 {
 	return m_Device;
 }
 
-void One::Renderer::BaseRenderer::Draw(One::Graphics::vertex_array_ptr &array)
+void One::BaseRenderer::Draw(One::vertex_array_ptr &array)
 {
 	m_Queue.push(array);
 }
 
-void One::Renderer::BaseRenderer::SceneBegin(const std::shared_ptr<One::Renderer::Camera>& camera,
-                                             const std::shared_ptr<Graphics::ShaderProgram>& shader)
+void One::BaseRenderer::SceneBegin(const std::shared_ptr<One::Camera> &camera,
+                                   const std::shared_ptr<ShaderProgram> &shader)
 {
 	m_ProjectionMatrix = camera->GetProjection(m_AttachedWindow->GetWindowWidth(),
 	                                           m_AttachedWindow->GetWindowHeight());
@@ -24,12 +23,12 @@ void One::Renderer::BaseRenderer::SceneBegin(const std::shared_ptr<One::Renderer
 	m_InScene = true;
 }
 
-void One::Renderer::BaseRenderer::SceneEnd()
+void One::BaseRenderer::SceneEnd()
 {
 	m_InScene = false;
 }
 
-void One::Renderer::BaseRenderer::Flush()
+void One::BaseRenderer::Flush()
 {
 	if (!m_InScene) {
 		// Sets the analytics
@@ -37,7 +36,6 @@ void One::Renderer::BaseRenderer::Flush()
 
 		if (!m_Queue.empty()) {
 			glm::mat4 model = glm::mat4(1.0f);
-//			model = glm::translate( model, glm::vec3( 0.0f, 52.0f, 0.0f ));
 			model = glm::scale(model, glm::vec3(100.0f, 100.0f, 0.0f));
 
 			m_CurrentShader->Use();
@@ -53,19 +51,19 @@ void One::Renderer::BaseRenderer::Flush()
 	}
 }
 
-One::Renderer::BaseRenderer::BaseRenderer(One::Graphics::API api)
+One::BaseRenderer::BaseRenderer(One::GraphicsAPI api)
 {
 	m_Device.GPU.GraphicsAPI = api;
 }
 
-void One::Renderer::BaseRenderer::InitializeDevice()
+void One::BaseRenderer::InitializeDevice()
 {
 	m_Device = {
 		GRAPHICS_COMMANDS->GetVendorID(),
 		GRAPHICS_COMMANDS->GetDriverID(),
 		GRAPHICS_COMMANDS->GetVendor(),
 		GRAPHICS_COMMANDS->GetRendererDeviceString(),
-		Graphics::API::GL3,
+		GraphicsAPI::GL3,
 		GRAPHICS_COMMANDS->GetMaxTextures(),
 		GRAPHICS_COMMANDS->GetMaxTextureSize(),
 		1280,
@@ -73,7 +71,7 @@ void One::Renderer::BaseRenderer::InitializeDevice()
 	};
 }
 
-void One::Renderer::BaseRenderer::AttachWindow(const std::shared_ptr<One::Window> &window)
+void One::BaseRenderer::AttachWindow(const std::shared_ptr<One::Window> &window)
 {
 	m_AttachedWindow = window;
 }

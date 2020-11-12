@@ -1,9 +1,9 @@
 #ifndef ONE_TYPES_H
 #define ONE_TYPES_H
 
-namespace One::Graphics
+namespace One
 {
-	enum class API
+	enum class GraphicsAPI
 	{
 		GL2, GL3, Vulkan
 	};

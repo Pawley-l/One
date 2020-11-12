@@ -1,7 +1,7 @@
 #include <Graphics/GL3/GL3Shader.h>
 #include <sstream>
 
-void One::Graphics::GL3::GL3Shader::CompileShader(const std::string &code, GLuint id)
+void One::GL3::GL3Shader::CompileShader(const std::string &code, GLuint id)
 {
 	const char *c_str = code.c_str();
 
@@ -18,7 +18,7 @@ void One::Graphics::GL3::GL3Shader::CompileShader(const std::string &code, GLuin
 	};
 }
 
-One::Graphics::GL3::GL3Shader::~GL3Shader()
+One::GL3::GL3Shader::~GL3Shader()
 {
 	glDeleteShader(m_ShaderID);
 }

@@ -3,24 +3,24 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void One::Renderer::Orth::OrthographicCamera::LookAt(glm::vec3 x, glm::vec3 y, glm::vec3 z)
+void One::OrthographicCamera::LookAt(glm::vec3 x, glm::vec3 y, glm::vec3 z)
 {
 	Camera::LookAt(x, y, z);
 }
 
-glm::mat4x4 One::Renderer::Orth::OrthographicCamera::GetProjection(float width, float height)
+glm::mat4x4 One::OrthographicCamera::GetProjection(float width, float height)
 {
 	m_ProjectionMatrix = glm::ortho(-(width / 2), width / 2, height / 2, -(height / 2), 0.0f, 10.f);
 
 	return m_ProjectionMatrix;
 }
 
-glm::mat4x4 One::Renderer::Orth::OrthographicCamera::GetView()
+glm::mat4x4 One::OrthographicCamera::GetView()
 {
 	return m_ViewMatrix;
 }
 
-void One::Renderer::Orth::OrthographicCamera::Move(float x, float y)
+void One::OrthographicCamera::Move(float x, float y)
 {
 	m_ViewMatrix = glm::translate(m_ViewMatrix, {y, x, 0});
 

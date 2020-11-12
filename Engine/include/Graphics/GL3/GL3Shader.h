@@ -6,14 +6,14 @@
 #include <Graphics/Shader.h>
 #include <GL/glew.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3ShaderProgram;
 
 	/**
 	 * GL3Shader class that all shaders should inherit from
 	 */
-	class GL3Shader : public One::Graphics::Shader
+	class GL3Shader : public One::Shader
 	{
 	private:
 		friend GL3ShaderProgram;

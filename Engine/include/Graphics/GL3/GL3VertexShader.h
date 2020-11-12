@@ -3,7 +3,7 @@
 
 #include "GL3Shader.h"
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	/**
 	 * Creates a vertex shader

@@ -8,7 +8,7 @@
 #include <One.h>
 #include <Graphics/Buffers.h>
 
-namespace One::Graphics
+namespace One
 {
 	/**
 	 * A vertex array is a object that stores the state needed to supply the an shader program.
@@ -17,8 +17,8 @@ namespace One::Graphics
 	class VertexArray
 	{
 	protected:
-		std::vector <index_buffer_ptr> m_IndexBuffers;
-		std::vector <vertex_buffer_ptr> m_VertexBuffers;
+		std::vector<index_buffer_ptr> m_IndexBuffers;
+		std::vector<vertex_buffer_ptr> m_VertexBuffers;
 
 	public:
 		virtual void Initialize() = 0;
@@ -36,9 +36,9 @@ namespace One::Graphics
 
 		virtual void Unbind() const = 0;
 
-		virtual void SetPrimitive(const Graphics::Primitives &primitive) = 0;
+		virtual void SetPrimitive(const Primitives &primitive) = 0;
 
-		virtual Graphics::Primitives GetPrimitive() = 0;
+		virtual Primitives GetPrimitive() = 0;
 
 		virtual VertexBuffer &operator[](std::size_t index) = 0;
 

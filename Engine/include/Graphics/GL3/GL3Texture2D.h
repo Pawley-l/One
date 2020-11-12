@@ -4,7 +4,7 @@
 #include <Graphics/GL3/GL3Texture.h>
 #include <One.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3Texture2D : public GL3Texture
 	{

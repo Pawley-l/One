@@ -9,9 +9,9 @@
 #include <Graphics/Texture.h>
 #include <One.h>
 
-#define GRAPHICS_FACTORY One::Graphics::Commands::GetInstance()->GetFactory()
+#define GRAPHICS_FACTORY One::Commands::GetInstance()->GetFactory()
 
-namespace One::Graphics
+namespace One
 {
 	/**
 	 * Graphics factory that creates graphics objects for every api. Apis need ot inherit this class and

@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <One.h>
 
-namespace One::Graphics
+namespace One
 {
 	class Shader
 	{

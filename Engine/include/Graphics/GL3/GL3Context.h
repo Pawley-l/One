@@ -4,15 +4,15 @@
 #include <Graphics/Context.h>
 #include <Window/Window.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
-	class GL3Context : public  One::Graphics::Context
+	class GL3Context : public One::Context
 	{
 	private:
-		Window* m_Window;
+		Window *m_Window;
 
 	public:
-		explicit GL3Context(Window* window);
+		explicit GL3Context(Window *window);
 
 		void InitializeContext() override;
 

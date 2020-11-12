@@ -5,7 +5,7 @@
 #include <memory>
 #include <One.h>
 
-namespace One::Graphics
+namespace One
 {
 	/**
 	 * Basic Texture class
@@ -14,7 +14,9 @@ namespace One::Graphics
 	{
 	public:
 		virtual void Initialize() = 0;
+
 		virtual void LoadFromFile(const std::string &file) = 0;
+
 		virtual void Bind(u32 id) = 0;
 		virtual void Unbind() = 0;
 		virtual unsigned int GetWidth() = 0;

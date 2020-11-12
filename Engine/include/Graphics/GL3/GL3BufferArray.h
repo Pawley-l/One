@@ -7,11 +7,11 @@
 #include <Graphics/GL3/GL3Buffers.h>
 #include <GL/glew.h>
 
-namespace One::Graphics::GL3
+namespace One::GL3
 {
 	class GL3BufferArray : public VertexArray
 	{
-		
+
 	public:
 		void Initialize() override;
 

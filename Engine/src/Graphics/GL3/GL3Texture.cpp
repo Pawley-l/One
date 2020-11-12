@@ -3,7 +3,7 @@
 #include <stb/stb_image.h>
 #include <iostream>
 
-void One::Graphics::GL3::GL3Texture::LoadFromFile(const std::string &file)
+void One::GL3::GL3Texture::LoadFromFile(const std::string &file)
 {
 	Initialize();
 	m_Path = file;
@@ -20,12 +20,12 @@ void One::Graphics::GL3::GL3Texture::LoadFromFile(const std::string &file)
 	stbi_image_free(data);
 }
 
-unsigned int One::Graphics::GL3::GL3Texture::GetWidth()
+unsigned int One::GL3::GL3Texture::GetWidth()
 {
 	return m_Width;
 }
 
-unsigned int One::Graphics::GL3::GL3Texture::GetHeight()
+unsigned int One::GL3::GL3Texture::GetHeight()
 {
 	return m_Width;
 }

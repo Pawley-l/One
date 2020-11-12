@@ -14,10 +14,6 @@ typedef int16_t i16;
 typedef int32_t i32;
 typedef int64_t i64;
 
-#define sizeof_16 2;
-#define sizeof_32 4;
-#define sizeof_64 8;
-
 #define oneIMPLEMENT_APP(X)                             \
 int main()                                              \
 {                                                       \

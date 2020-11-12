@@ -7,10 +7,12 @@
 #include <vector>
 #include <One.h>
 
-namespace One::Graphics
+namespace One
 {
 	class VertexArray;
+
 	class VertexBuffer;
+
 	class IndexBuffer;
 
 	typedef std::shared_ptr<VertexArray> vertex_array_ptr;
@@ -25,13 +27,9 @@ namespace One::Graphics
 	{
 	public:
 		virtual void Initialize(u32 *indices, u32 count, DrawStrategy strategy) = 0;
-
 		virtual void Bind() const = 0;
-
 		virtual void Unbind() const = 0;
-
 		virtual unsigned int GetCount() = 0;
-
 		virtual ~IndexBuffer() = default;
 	};
 
@@ -42,11 +40,8 @@ namespace One::Graphics
 	{
 	public:
 		virtual void Initialize(float *vertices, u32 size, DrawStrategy strategy) = 0;
-
 		virtual void Bind() const = 0;
-
 		virtual void Unbind() const = 0;
-
 		virtual ~VertexBuffer() = default;
 	};
 
