@@ -1,12 +1,12 @@
-#ifndef ONE_PROJECTONE_H
-#define ONE_PROJECTONE_H
+#ifndef ONE_TESTGAME_H
+#define ONE_TESTGAME_H
 
 #include <One.h>
 #include <Application/Application.h>
 #include <Graphics/Buffers.h>
 #include <Renderer/Camera.h>
 
-class ProjectOne : public One::Application
+class TestGame : public One::Application
 {
 public:
 	void Startup() override;
@@ -32,4 +32,4 @@ private:
 };
 
 
-#endif //ONE_PROJECTONE_H
+#endif //ONE_TESTGAME_H

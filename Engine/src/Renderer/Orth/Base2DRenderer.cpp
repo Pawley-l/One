@@ -84,7 +84,6 @@ void One::Renderer::Orth::Base2DRenderer::Flush()
 		auto shape = m_RendererQueue.front();
 
 		glm::mat4 model = shape.Transform.GetModel();
-//		model = shape.Transform.GetModel();
 		model = glm::scale(model, glm::vec3(100.0f, 100.0f, 0.0f));
 
 		m_CurrentShader->Use();

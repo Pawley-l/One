@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <Graphics/Types.h>
+#include <any>
 
 /**
  * Wrapper around common opengl 3 functions

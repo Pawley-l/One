@@ -22,9 +22,9 @@ namespace One::Graphics::GL3
 
 		u32 GetDriverID() override;
 
-		string GetVendor() override;
+		std::string GetVendor() override;
 
-		string GetRendererDeviceString() override;
+		std::string GetRendererDeviceString() override;
 
 		u32 GetMaxTextures() override;
 

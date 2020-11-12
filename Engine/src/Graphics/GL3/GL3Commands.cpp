@@ -47,12 +47,12 @@ u32 One::Graphics::GL3::GL3Commands::GetDriverID()
 	return 0;
 }
 
-string One::Graphics::GL3::GL3Commands::GetVendor()
+std::string One::Graphics::GL3::GL3Commands::GetVendor()
 {
 	return std::string();
 }
 
-string One::Graphics::GL3::GL3Commands::GetRendererDeviceString()
+std::string One::Graphics::GL3::GL3Commands::GetRendererDeviceString()
 {
 	return std::string();
 }

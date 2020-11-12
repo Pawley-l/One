@@ -1,4 +1,5 @@
 #include <Graphics/GL3/GL3Functions.h>
+#include <any>
 
 void One::Graphics::GL3::Functions::DrawArrays(One::Graphics::Primitives primitive, unsigned int first, unsigned int count)
 {
@@ -81,10 +82,12 @@ void One::Graphics::GL3::Functions::VertexAttribPointer(unsigned int location, u
 			break;
 		case ShaderTypes::Float:
 			glVertexAttribPointer(location, size, GL_FLOAT, !normalized ? GL_TRUE : GL_FALSE,
-			                      stride, offset);
+			                      stride, std::any_cast<void *>(offset));
+			break;
 		case ShaderTypes::Int:
 			glVertexAttribPointer(location, size, GL_INT, !normalized ? GL_TRUE : GL_FALSE,
-			                      stride, offset);
+			                      stride, std::any_cast<void *>(offset));
+			break;
 	}
 
 }

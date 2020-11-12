@@ -14,9 +14,6 @@ typedef int16_t i16;
 typedef int32_t i32;
 typedef int64_t i64;
 
-// defined here for easy swapping in future
-typedef std::string string;
-
 #define sizeof_16 2;
 #define sizeof_32 4;
 #define sizeof_64 8;

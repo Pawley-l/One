@@ -27,7 +27,9 @@ namespace One::Renderer::Orth
 
 	private:
 		std::vector<std::shared_ptr<Graphics::Texture>> m_Textures;
+
 		std::vector<std::shared_ptr<Graphics::VertexArray>> m_VertexArrays;
+
 		std::queue<Shape> m_RendererQueue;
 	};
 }
