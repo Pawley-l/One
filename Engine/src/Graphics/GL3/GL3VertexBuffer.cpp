@@ -2,11 +2,11 @@
 #include <Graphics/GL3/GL3Functions.h>
 #include <iostream>
 
-void One::Graphics::GL3::GL3VertexBuffer::Initialize(float *vertices, u32 size)
+void One::Graphics::GL3::GL3VertexBuffer::Initialize(float *vertices, u32 size, DrawStrategy strategy)
 {
 	Functions::GenBuffers(1, &m_BufferID);
 	Functions::BindBuffer(GL_ARRAY_BUFFER, m_BufferID);
-	Functions::BufferData(GL_ARRAY_BUFFER, size, vertices, DrawStrategy::Static);
+	Functions::BufferData(GL_ARRAY_BUFFER, size, vertices, strategy);
 
 	m_BufferSize = size / sizeof(float);
 	Functions::BindBuffer(1, m_BufferID);

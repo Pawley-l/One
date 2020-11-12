@@ -24,17 +24,21 @@ namespace One::Graphics
 		 * Creates a index buffer and returns it
 		 * @param indices
 		 * @param size
+		 * @param strategy
 		 * @return index buffer
 		 */
-		virtual std::shared_ptr<IndexBuffer> CreateIndexBuffer(u32 *indices, u32 size) = 0;
+		virtual std::shared_ptr<IndexBuffer>
+		CreateIndexBuffer(u32 *indices, u32 size, DrawStrategy strategy) = 0;
 
 		/**
 		 * Create a vertex buffer and returns it
 		 * @param vertices
 		 * @param size
+		 * @param strategy
 		 * @return vertex buffer
 		 */
-		virtual std::shared_ptr<VertexBuffer> CreateVertexBuffer(float *vertices, u32 size) = 0;
+		virtual std::shared_ptr<VertexBuffer>
+		CreateVertexBuffer(float *vertices, u32 size, DrawStrategy strategy) = 0;
 
 		/**
 		 * Creates and returns a buffer array

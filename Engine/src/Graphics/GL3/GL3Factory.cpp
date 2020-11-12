@@ -7,17 +7,19 @@ One::Graphics::GL3::GL3Factory::GL3Factory()
 = default;
 
 std::shared_ptr<One::Graphics::IndexBuffer>
-One::Graphics::GL3::GL3Factory::CreateIndexBuffer(u32 *indices, u32 size)
+One::Graphics::GL3::GL3Factory::CreateIndexBuffer(u32 *indices, u32 size, DrawStrategy strategy)
 {
 	auto buffer = std::shared_ptr<One::Graphics::IndexBuffer>(new GL3IndexBuffer());
-	buffer->Initialize(indices, size);
+	buffer->Initialize(indices, size, strategy);
 	return buffer;
 }
 
-std::shared_ptr<One::Graphics::VertexBuffer> One::Graphics::GL3::GL3Factory::CreateVertexBuffer(float *vertices, u32 size)
+std::shared_ptr<One::Graphics::VertexBuffer> One::Graphics::GL3::GL3Factory::CreateVertexBuffer(float *vertices,
+                                                                                                u32 size,
+                                                                                                DrawStrategy strategy)
 {
 	auto buffer = std::shared_ptr<One::Graphics::VertexBuffer>(new GL3VertexBuffer());
-	buffer->Initialize(vertices, size);
+	buffer->Initialize(vertices, size, strategy);
 	return buffer;
 }
 

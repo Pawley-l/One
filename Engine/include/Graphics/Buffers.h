@@ -24,10 +24,14 @@ namespace One::Graphics
 	class IndexBuffer
 	{
 	public:
-		virtual void Initialize(u32 *indices, u32 count) = 0;
+		virtual void Initialize(u32 *indices, u32 count, DrawStrategy strategy) = 0;
+
 		virtual void Bind() const = 0;
+
 		virtual void Unbind() const = 0;
+
 		virtual unsigned int GetCount() = 0;
+
 		virtual ~IndexBuffer() = default;
 	};
 
@@ -37,9 +41,12 @@ namespace One::Graphics
 	class VertexBuffer
 	{
 	public:
-		virtual void Initialize(float *vertices, u32 size) = 0;
+		virtual void Initialize(float *vertices, u32 size, DrawStrategy strategy) = 0;
+
 		virtual void Bind() const = 0;
+
 		virtual void Unbind() const = 0;
+
 		virtual ~VertexBuffer() = default;
 	};
 

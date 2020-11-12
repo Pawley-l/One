@@ -16,10 +16,12 @@ namespace One::Graphics::GL3
 		friend GL3Commands;
 
 		explicit GL3Factory();
-	public:
-		std::shared_ptr<IndexBuffer> CreateIndexBuffer(u32 *indices, u32 size) override;
 
-		std::shared_ptr<VertexBuffer> CreateVertexBuffer(float *vertices, u32 size) override;
+	public:
+		std::shared_ptr<IndexBuffer> CreateIndexBuffer(u32 *indices, u32 size, DrawStrategy strategy) override;
+
+		std::shared_ptr<VertexBuffer>
+		CreateVertexBuffer(float *vertices, u32 size, DrawStrategy strategy) override;
 
 		std::shared_ptr<Shader> CreateShader(Shaders shader) override;
 

@@ -16,9 +16,9 @@ namespace One::Graphics::GL3
 
 		friend GL3BufferArray;
 	public:
-		void Initialize(float *vertices, u32 size) override;
+		void Initialize(float *vertices, u32 size, DrawStrategy strategy) override;
 
-		void  Bind() const override;
+		void Bind() const override;
 
 		void Unbind() const override;
 

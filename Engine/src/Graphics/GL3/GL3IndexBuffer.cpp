@@ -2,11 +2,11 @@
 #include <Graphics/GL3/GL3Functions.h>
 #include <iostream>
 
-void One::Graphics::GL3::GL3IndexBuffer::Initialize(u32 *indices, u32 size)
+void One::Graphics::GL3::GL3IndexBuffer::Initialize(u32 *indices, u32 size, DrawStrategy strategy)
 {
 	Functions::GenBuffers(1, &m_BufferID);
 	Functions::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID);
-	Functions::BufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, DrawStrategy::Static);
+	Functions::BufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, strategy);
 
 	m_Count = size / sizeof(u32);
 	Functions::BindBuffer(1, m_BufferID);

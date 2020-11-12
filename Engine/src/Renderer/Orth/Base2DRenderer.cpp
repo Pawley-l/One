@@ -23,7 +23,7 @@ One::Renderer::Orth::Shape One::Renderer::Orth::Base2DRenderer::CreateShape
 
 	One::Graphics::vertex_buffer_ptr m_VertexBuffer;
 	auto m_IndexBuffer = One::Graphics::index_buffer_ptr(
-		GRAPHICS_FACTORY.CreateIndexBuffer(indices, sizeof(indices)));
+		GRAPHICS_FACTORY.CreateIndexBuffer(indices, sizeof(indices), Graphics::DrawStrategy::Dynamic));
 	auto m_VertexArray = One::Graphics::vertex_array_ptr(GRAPHICS_FACTORY.CreateBufferArray());
 
 	switch (shape.Shape) {
@@ -31,7 +31,8 @@ One::Renderer::Orth::Shape One::Renderer::Orth::Base2DRenderer::CreateShape
 			break;
 		case Shape::ShapeType::Quad:
 			m_VertexBuffer = One::Graphics::vertex_buffer_ptr
-				(GRAPHICS_FACTORY.CreateVertexBuffer(square, sizeof(square)));
+				(GRAPHICS_FACTORY.CreateVertexBuffer(square, sizeof(square),
+				                                     Graphics::DrawStrategy::Dynamic));
 			break;
 	}
 
