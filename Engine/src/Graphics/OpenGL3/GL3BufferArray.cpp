@@ -1,5 +1,5 @@
-#include <Graphics/GL3/GL3BufferArray.h>
-#include <Graphics/GL3/GL3Functions.h>
+#include <Graphics/OpenGL3/GL3BufferArray.h>
+#include <Graphics/OpenGL3/GL3Functions.h>
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"

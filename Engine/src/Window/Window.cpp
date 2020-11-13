@@ -1,7 +1,7 @@
 #include <Window/Window.h>
 #include <iostream>
 #include <utility>
-#include <Graphics/GL3/GL3Context.h>
+#include <Graphics/OpenGL3/GL3Context.h>
 #include <Graphics/Commands.h>
 #include <Renderer/BaseRenderer.h>
 #include <Application/InputManager.h>

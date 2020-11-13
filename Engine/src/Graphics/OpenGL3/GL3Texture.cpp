@@ -1,5 +1,4 @@
-#include <Graphics/GL3/GL3Texture.h>
-#define STB_IMAGE_IMPLEMENTATION
+#include <Graphics/OpenGL3/GL3Texture.h>
 #include <stb/stb_image.h>
 #include <iostream>
 
@@ -20,12 +19,16 @@ void One::GL3::GL3Texture::LoadFromFile(const std::string &file)
 	stbi_image_free(data);
 }
 
-unsigned int One::GL3::GL3Texture::GetWidth()
+void One::GL3::GL3Texture::LoadFromImage(const One::Image &image)
 {
-	return m_Width;
+	if (image.IsImageLoaded()) {
+		Initialize();
+		InitializeTexture();
+		LoadTexture(image.GetImageData());
+	}
 }
 
-unsigned int One::GL3::GL3Texture::GetHeight()
+std::pair<int, int> One::GL3::GL3Texture::GetSize()
 {
-	return m_Width;
+	return std::pair<int, int>(m_Width, m_Height);
 }

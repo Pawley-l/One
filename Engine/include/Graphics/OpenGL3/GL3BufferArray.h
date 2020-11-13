@@ -4,7 +4,7 @@
 #include <Graphics/Buffers.h>
 #include <Graphics/Array.h>
 #include <Graphics/Types.h>
-#include <Graphics/GL3/GL3Buffers.h>
+#include <Graphics/OpenGL3/GL3Buffers.h>
 #include <GL/glew.h>
 
 namespace One::GL3

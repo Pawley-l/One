@@ -1,5 +1,5 @@
-#include <Graphics/GL3/GL3VertexBuffer.h>
-#include <Graphics/GL3/GL3Functions.h>
+#include <Graphics/OpenGL3/GL3VertexBuffer.h>
+#include <Graphics/OpenGL3/GL3Functions.h>
 #include <iostream>
 
 void One::GL3::GL3VertexBuffer::Initialize(float *vertices, u32 size, DrawStrategy strategy)

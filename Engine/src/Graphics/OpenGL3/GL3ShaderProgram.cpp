@@ -1,5 +1,5 @@
-#include <Graphics/GL3/GL3ShaderProgram.h>
-#include <Graphics/GL3/GL3Shader.h>
+#include <Graphics/OpenGL3/GL3ShaderProgram.h>
+#include <Graphics/OpenGL3/GL3Shader.h>
 #include <glm/glm.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>

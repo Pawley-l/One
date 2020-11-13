@@ -1,4 +1,4 @@
-#include <Graphics/GL3/GL3Shader.h>
+#include <Graphics/OpenGL3/GL3Shader.h>
 #include <sstream>
 
 void One::GL3::GL3Shader::CompileShader(const std::string &code, GLuint id)

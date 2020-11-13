@@ -1,4 +1,4 @@
-#include <Graphics/GL3/GL3Texture2D.h>
+#include <Graphics/OpenGL3/GL3Texture2D.h>
 #include <GL/glew.h>
 
 void One::GL3::GL3Texture2D::Initialize()

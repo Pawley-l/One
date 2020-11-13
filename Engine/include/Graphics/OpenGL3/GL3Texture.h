@@ -10,13 +10,14 @@ namespace One::GL3
 	public:
 		void LoadFromFile(const std::string &file) override;
 
-		unsigned int GetWidth() override;
+		std::pair<int, int> GetSize() override;
 
-		unsigned int GetHeight() override;
+		void LoadFromImage(const Image &image) override;
 
 	protected:
-		virtual void InitializeTexture() =0;
-		virtual void LoadTexture(unsigned char *data) =0;
+		virtual void InitializeTexture() = 0;
+
+		virtual void LoadTexture(unsigned char *data) = 0;
 
 		int m_Width;
 		int m_Height;

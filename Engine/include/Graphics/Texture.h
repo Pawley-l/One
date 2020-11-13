@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <One.h>
+#include <Renderer/Image.h>
 
 namespace One
 {
@@ -17,10 +18,13 @@ namespace One
 
 		virtual void LoadFromFile(const std::string &file) = 0;
 
+		virtual void LoadFromImage(const Image &image) = 0;
+
 		virtual void Bind(u32 id) = 0;
+
 		virtual void Unbind() = 0;
-		virtual unsigned int GetWidth() = 0;
-		virtual unsigned int GetHeight() = 0;
+
+		virtual std::pair<int, int> GetSize() = 0;
 	};
 
 	typedef std::shared_ptr<Texture> texture_ptr;

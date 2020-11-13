@@ -1,7 +1,7 @@
 #ifndef ONE_GL3TEXTURE2D_H
 #define ONE_GL3TEXTURE2D_H
 
-#include <Graphics/GL3/GL3Texture.h>
+#include <Graphics/OpenGL3/GL3Texture.h>
 #include <One.h>
 
 namespace One::GL3

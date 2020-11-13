@@ -1,5 +1,5 @@
 #include <Graphics/Commands.h>
-#include <Graphics/GL3/GL3Commands.h>
+#include <Graphics/OpenGL3/GL3Commands.h>
 #include <iostream>
 
 std::unique_ptr<One::Commands> One::Commands::m_Instance;

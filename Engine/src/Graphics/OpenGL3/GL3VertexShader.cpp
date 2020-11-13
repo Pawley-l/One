@@ -1,4 +1,4 @@
-#include <Graphics/GL3/GL3VertexShader.h>
+#include <Graphics/OpenGL3/GL3VertexShader.h>
 
 void One::GL3::GL3VertexShader::LoadFromFile(const std::string &file)
 {

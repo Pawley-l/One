@@ -1,6 +1,6 @@
-#include <Graphics/GL3/GL3Factory.h>
-#include <Graphics/GL3/GL3.h>
-#include <Graphics/GL3/GL3Texture2D.h>
+#include <Graphics/OpenGL3/GL3Factory.h>
+#include <Graphics/OpenGL3/GL3.h>
+#include <Graphics/OpenGL3/GL3Texture2D.h>
 #include <memory>
 
 One::GL3::GL3Factory::GL3Factory()

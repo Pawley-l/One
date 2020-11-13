@@ -1,4 +1,4 @@
-#include <Graphics/GL3/GL3Context.h>
+#include <Graphics/OpenGL3/GL3Context.h>
 #include <GLFW/glfw3.h>
 #include <GL/glew.h>
 #include <cstdio>

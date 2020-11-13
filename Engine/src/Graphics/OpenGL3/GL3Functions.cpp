@@ -1,4 +1,4 @@
-#include <Graphics/GL3/GL3Functions.h>
+#include <Graphics/OpenGL3/GL3Functions.h>
 #include <any>
 
 void One::GL3::Functions::DrawArrays(One::Primitives primitive, unsigned int first, unsigned int count)

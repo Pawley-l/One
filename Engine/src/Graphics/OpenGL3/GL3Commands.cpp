@@ -1,7 +1,7 @@
-#include <Graphics/GL3/GL3Commands.h>
-#include <Graphics/GL3/GL3Buffers.h>
-#include <Graphics/GL3/GL3Functions.h>
-#include <Graphics/GL3/GL3Factory.h>
+#include <Graphics/OpenGL3/GL3Commands.h>
+#include <Graphics/OpenGL3/GL3Buffers.h>
+#include <Graphics/OpenGL3/GL3Functions.h>
+#include <Graphics/OpenGL3/GL3Factory.h>
 
 One::GL3::GL3Commands::GL3Commands()
 {

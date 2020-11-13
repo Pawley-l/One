@@ -38,8 +38,7 @@ namespace One
 			{
 				u32 DrawCalls;
 			} Analytics;
-		}
-			GPU;
+		} GPU;
 		struct MonitorData
 		{
 			u32 Width;
