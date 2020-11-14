@@ -40,8 +40,13 @@ namespace One
 	{
 	public:
 		virtual void Initialize(float *vertices, u32 size, DrawStrategy strategy) = 0;
+
 		virtual void Bind() const = 0;
+
 		virtual void Unbind() const = 0;
+
+		virtual void SubData(u32 offset, u32 size, void *data) = 0;
+
 		virtual ~VertexBuffer() = default;
 	};
 

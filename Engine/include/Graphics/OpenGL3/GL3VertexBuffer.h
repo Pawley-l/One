@@ -23,6 +23,8 @@ namespace One::GL3
 		void Unbind() const override;
 
 		~GL3VertexBuffer() override;
+
+		void SubData(u32 offset, u32 size, void *data) override;
 	};
 }
 

@@ -15,6 +15,10 @@ void One::GL3::GL3Context::InitializeContext()
 	if (GLEW_OK != err) {
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 	}
+
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
 }
 
 void One::GL3::GL3Context::SwapBuffers()

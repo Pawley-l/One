@@ -12,6 +12,8 @@
 #include <Graphics/Shader.h>
 #include <Graphics/Array.h>
 
+#define MAX_VERTEX
+
 namespace One
 {
 	class GraphicsFunctionError : public std::logic_error
@@ -47,6 +49,8 @@ namespace One
 	class Renderer2D
 	{
 	public:
+		Renderer2D();
+
 		// Texture API
 		virtual RenderResource2D CreateTexture2D();
 
@@ -80,10 +84,6 @@ namespace One
 
 		virtual void SetCanvasTexture2D(RenderResource2D &resource);
 
-		// Direct Draw API
-//		virtual void DirectDrawQuad(glm::vec2 position, glm::vec2 size,
-//						RenderResource2D &texture, float rotate = 0) = 0;
-
 		// Batch Draw API
 		virtual void BeginBatch();
 
@@ -93,24 +93,18 @@ namespace One
 
 		// Draw Commands
 		virtual void FlushBatch();
-//		virtual void FlushDirect() = 0;
+
+		// Viewport Commands
+		virtual void SwapBuffer();
+
+		virtual void ClearBuffer();
 
 	protected:
-
-		struct DrawCall
-		{
-			u32 ShapeID;
-			u32 TextureID;
-		};
-
-
 		std::vector<std::shared_ptr<Texture>> m_RenderingResourcesTexture;
 		Canvas m_Canvas;
-		std::unique_ptr<VertexArray> m_VertexArray;
-		std::vector<std::shared_ptr<VertexArray>> m_VertexBuffers;
-
-	private:
-
+		std::shared_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 	};
 
 }
