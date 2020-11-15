@@ -8,6 +8,8 @@ namespace One
 	class OrthographicCamera : public One::Camera
 	{
 	public:
+		OrthographicCamera();
+
 		void Move(float x, float y) override;
 
 	public:
@@ -17,6 +19,9 @@ namespace One
 
 		glm::mat4x4 GetView() override;
 
+	private:
+		glm::vec3 m_Position;
+		float m_Rotiation = 0.f;
 	};
 }
 

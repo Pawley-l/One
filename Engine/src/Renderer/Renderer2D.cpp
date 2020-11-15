@@ -40,68 +40,72 @@ static std::string fragment(R"(
 	}
 	)");
 
-//struct Vertex
-//{
-//	glm::vec3 Position;
-//	glm::vec4 Colour;
-//	glm::vec2 TextureCoordinates;
-//	float Texture;
-//};
+namespace One
+{
+	struct Vertex
+	{
+		glm::vec3 Position;
+		glm::vec4 Colour;
+		glm::vec2 TextureCoordinates;
+		float Texture;
+	};
 
-//template<int size>
-//static std::array<Vertex, size> generate_indices()
-//{
-//	std::array<Vertex, size> array{};
-//
-//	// Process indices
-//
-//	return array;
-//}
-//
-//static u32 indices_[] = {  // note that we start from 0!
-//	0, 1, 3,   // first triangle
-//	1, 2, 3    // second triangle
-//};
-//
-//static std::array<Vertex, 4> CreateQuad(float x, float y, float size, u32 id)
-//{
-//	Vertex v1{};
-//	v1.Position = {x, y, 0.f};
-//	v1.Colour = {0.1f, 0.3f, 0.7f, 1.f};
-//	v1.TextureCoordinates = {0.f, 0.f };
-//	v1.Texture = id;
-//
-//	Vertex v2{};
-//	v2.Position = {x+size, y, 0.f};
-//	v2.Colour = {0.1f, 0.3f, 0.7f, 1.f};
-//	v2.TextureCoordinates = {1.f, 0.f };
-//	v2.Texture = id;
-//
-//	Vertex v3{};
-//	v3.Position = {x+size, y+size, 0.f};
-//	v3.Colour = {0.1f, 0.3f, 0.7f, 1.f};
-//	v3.TextureCoordinates = {1.f, 1.f };
-//	v3.Texture = id;
-//
-//	Vertex v4{};
-//	v4.Position = {x, y+size, 0.f};
-//	v4.Colour = {0.1f, 0.3f, 0.7f, 1.f};
-//	v4.TextureCoordinates = {0.f, 1.f };
-//	v4.Texture = id;
-//
-//	return {v1, v2, v3, v4};
-//}
+	template<int size>
+	static std::array<Vertex, size> generate_indices()
+	{
+		std::array<Vertex, size> array{};
+
+		// Process indices
+
+		return array;
+	}
+
+	static u32 indices_[] = {  // note that we start from 0!
+		0, 1, 3,   // first triangle
+		1, 2, 3    // second triangle
+	};
+
+	static std::array<Vertex, 4> CreateQuad(float x, float y, float size, u32 id)
+	{
+		Vertex v1{};
+		v1.Position = {x, y, 0.f};
+		v1.Colour = {0.1f, 0.3f, 0.7f, 1.f};
+		v1.TextureCoordinates = {0.f, 0.f};
+		v1.Texture = id;
+
+		Vertex v2{};
+		v2.Position = {x + size, y, 0.f};
+		v2.Colour = {0.1f, 0.3f, 0.7f, 1.f};
+		v2.TextureCoordinates = {1.f, 0.f};
+		v2.Texture = id;
+
+		Vertex v3{};
+		v3.Position = {x + size, y + size, 0.f};
+		v3.Colour = {0.1f, 0.3f, 0.7f, 1.f};
+		v3.TextureCoordinates = {1.f, 1.f};
+		v3.Texture = id;
+
+		Vertex v4{};
+		v4.Position = {x, y + size, 0.f};
+		v4.Colour = {0.1f, 0.3f, 0.7f, 1.f};
+		v4.TextureCoordinates = {0.f, 1.f};
+		v4.Texture = id;
+
+		return {v1, v2, v3, v4};
+	}
+}
+
 
 One::Renderer2D::Renderer2D()
 {
-//	auto quad = CreateQuad(10, 10, 100, 0);
-//	u32 vertices[4];
-//
-//	memcpy(vertices, quad.data(), quad.size() * sizeof(Vertex));
-//
-//	m_VertexArray = GRAPHICS_FACTORY.CreateBufferArray();
-//	m_VertexBuffer = GRAPHICS_FACTORY.CreateVertexBuffer(nullptr, sizeof(Vertex) * 1000, DrawStrategy::Dynamic);
-//	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(indices_, sizeof(indices_), DrawStrategy::Dynamic);
+	auto quad = CreateQuad(10, 10, 100, 0);
+	Vertex vertices[4];
+
+	memcpy(vertices, quad.data(), quad.size() * sizeof(Vertex));
+
+	m_VertexArray = GRAPHICS_FACTORY.CreateBufferArray();
+	m_VertexBuffer = GRAPHICS_FACTORY.CreateVertexBuffer(nullptr, sizeof(Vertex) * 1000, DrawStrategy::Dynamic);
+	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(indices_, sizeof(indices_), DrawStrategy::Dynamic);
 }
 
 One::RenderResource2D One::Renderer2D::CreateTexture2D()
