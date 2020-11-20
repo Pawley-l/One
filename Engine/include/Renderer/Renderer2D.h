@@ -11,6 +11,7 @@
 #include <Graphics/Types.h>
 #include <Graphics/Shader.h>
 #include <Graphics/Array.h>
+#include "Camera.h"
 
 #define MAX_VERTEX
 
@@ -73,7 +74,7 @@ namespace One
 		virtual RenderResource2D CreateShape(Shapes shape);
 
 		// Transformation API
-		virtual void ShapeMove(RenderResource2D resource, float x, float y);
+		virtual void ShapePosition(RenderResource2D resource, float x, float y);
 
 		virtual void ShapeRotate(RenderResource2D resource, float by);
 
@@ -85,9 +86,9 @@ namespace One
 		virtual void SetCanvasTexture2D(RenderResource2D &resource);
 
 		// Batch Draw API
-		virtual void BeginBatch();
+		virtual void BeginBatch(std::shared_ptr<Camera> camera, std::shared_ptr<ShaderProgram> shader);
 
-		virtual void DrawShape(RenderResource2D &resource, One::RenderResource2D &texture);
+//		virtual void DrawShape(RenderResource2D &resource, One::RenderResource2D &texture);
 
 		virtual void EndBatch();
 
@@ -105,6 +106,11 @@ namespace One
 		std::shared_ptr<VertexArray> m_VertexArray;
 		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Camera> m_Camera;
+		std::shared_ptr<ShaderProgram> m_Shader;
+		glm::mat4 m_ProjectionMatrix{};
+		glm::mat4 m_ViewMatrix{};
+		u32 m_ShapeIndex = 0;
 	};
 
 }

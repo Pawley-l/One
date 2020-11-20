@@ -1,4 +1,5 @@
 #include <Application/Application.h>
+#include <iostream>
 
 void One::Application::StartApplication()
 {

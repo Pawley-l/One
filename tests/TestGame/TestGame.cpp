@@ -8,18 +8,6 @@
 
 oneIMPLEMENT_APP(TestGame)
 
-//float vertices[] = {
-//	// positions          // colors           // texture coords
-//	0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-//	0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-//	-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-//	-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left
-//};
-u32 indices[] = {  // note that we start from 0!
-	0, 1, 3,   // first triangle
-	1, 2, 3    // second triangle
-};
-
 struct Vertex
 {
 	glm::vec3 Position;
@@ -27,6 +15,27 @@ struct Vertex
 	glm::vec2 TextureCoordinates;
 	float Texture;
 };
+
+template<int size>
+static std::array<u32, size> generate_indices()
+{
+	std::array<u32, size> array{};
+
+	int offset = 0;
+	for (int i = 0; i < size; i += 6) {
+		array[i] = offset + 0;
+		array[i + 1] = offset + 1;
+		array[i + 2] = offset + 3;
+
+		array[i + 3] = offset + 1;
+		array[i + 4] = offset + 2;
+		array[i + 5] = offset + 3;
+
+		offset += 4;
+	}
+
+	return array;
+}
 
 static std::array<Vertex, 4> CreateQuad(float x, float y, float size, u32 id)
 {
@@ -60,16 +69,19 @@ static std::array<Vertex, 4> CreateQuad(float x, float y, float size, u32 id)
 
 void TestGame::Startup()
 {
+	u32 _indices[1000];
+	auto in = generate_indices<1000>();
+	memcpy(_indices, in.data(), in.size() * sizeof(u32));
+
 	m_Camera = std::make_shared<One::OrthographicCamera>();
 
 	m_ShaderProgram = GRAPHICS_COMMANDS->GetFactory().CreateShaderProgram();
 	m_VertexBuffer = GRAPHICS_FACTORY.CreateVertexBuffer(nullptr, sizeof(Vertex) * 1000,
 	                                                     One::DrawStrategy::Dynamic);
-	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(indices, sizeof(indices), One::DrawStrategy::Dynamic);
+	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(_indices, sizeof(_indices), One::DrawStrategy::Dynamic);
 	m_VertexArray = GRAPHICS_FACTORY.CreateBufferArray();
 
 	auto vertex = One::shader_ptr(GRAPHICS_COMMANDS->GetFactory().CreateShader(One::Shaders::Vertex));
-
 	auto fragment = One::shader_ptr(GRAPHICS_COMMANDS->GetFactory().CreateShader(One::Shaders::Fragment));
 
 	vertex->LoadFromString(R"(
@@ -146,13 +158,13 @@ void TestGame::ProcessFrame()
 //		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 
 	if (One::InputManager::IsKeyHeld(GLFW_KEY_W))
-		y += 1;
+		y += 10;
 	if (One::InputManager::IsKeyHeld(GLFW_KEY_S))
-		y -= 1;
+		y -= 10;
 	if (One::InputManager::IsKeyHeld(GLFW_KEY_A))
-		x -= 1;
+		x -= 10;
 	if (One::InputManager::IsKeyHeld(GLFW_KEY_D))
-		x += 1;
+		x += 10;
 
 	auto quad = CreateQuad(x, y, 100, 0);
 

@@ -31,6 +31,10 @@ namespace One
 		u32 m_Width;
 		u32 m_Height;
 
+
+		double m_PreviousFrame = 0;
+		int m_FrameCount = 0;
+
 	private:
 		std::function<void()> m_InputCallback;
 
@@ -52,7 +56,7 @@ namespace One
 		 * Starts the window with the renderer
 		 * @param renderer
 		 */
-		void Start(BaseRenderer &renderer);
+		void Start(BaseRenderer &renderer, bool fullscreen = false);
 
 		/**
 		 * Returns true if the window should close

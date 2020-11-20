@@ -5,6 +5,7 @@
 #include <Graphics/Commands.h>
 #include <Renderer/BaseRenderer.h>
 #include <Application/InputManager.h>
+#include <sstream>
 
 void window_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -12,7 +13,9 @@ void window_size_callback(GLFWwindow* window, int width, int height)
 }
 
 One::Window::Window(std::string name, u32 width, u32 height) : m_Title(std::move(name)), m_Width(width), m_Height(height)
-{}
+{
+	m_PreviousFrame = glfwGetTime();
+}
 
 One::Window::~Window()
 {
@@ -29,6 +32,16 @@ bool One::Window::ShouldClose()
 void One::Window::SwapBuffers()
 {
 	m_Context->SwapBuffers();
+
+	double currentTime = glfwGetTime();
+	m_FrameCount++;
+	if (currentTime - m_PreviousFrame >= 1.0) {
+		std::stringstream ss;
+		ss << m_Title << " (" << m_FrameCount << " fps)";
+		glfwSetWindowTitle(m_WindowImpl, ss.str().c_str());
+		m_FrameCount = 0;
+		m_PreviousFrame = currentTime;
+	}
 }
 
 void One::Window::MarkShouldClose(bool value)
@@ -75,7 +88,6 @@ u32 One::Window::GetWindowWidth()
 {
 	int width, height;
 	glfwGetWindowSize(m_WindowImpl, &width, &height);
-
 	return width;
 }
 
@@ -83,14 +95,19 @@ u32 One::Window::GetWindowHeight()
 {
 	int width, height;
 	glfwGetWindowSize(m_WindowImpl, &width, &height);
-
 	return height;
 }
 
-void One::Window::Start(One::BaseRenderer &renderer)
+void One::Window::Start(One::BaseRenderer &renderer, bool fullscreen)
 {
 	glfwInit();
-	m_WindowImpl = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, nullptr);
+	if (!fullscreen)
+		m_WindowImpl = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, nullptr);
+	else
+		m_WindowImpl = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), glfwGetPrimaryMonitor(),
+		                                nullptr);
+
+//	glfwWindowHint( GLFW_DOUBLEBUFFER, GL_FALSE );
 
 	if (m_WindowImpl == nullptr) {
 		std::cout << "Failed to create GLFW window" << std::endl;

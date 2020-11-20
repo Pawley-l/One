@@ -3,42 +3,7 @@
 #include <Graphics/Commands.h>
 #include <Graphics/Types.h>
 #include <cstring>
-
-static std::string vertex(R"(
-	#version 330 core
-	layout (location = 0) in vec3 aPos;
-	layout (location = 1) in vec3 aColor;
-	layout (location = 2) in vec2 aTexCoord;
-
-	uniform mat4 model;
-	uniform mat4 view;
-	uniform mat4 projection;
-
-	out vec3 ourColor;
-	out vec2 TexCoord;
-
-	void main()
-	{
-	    gl_Position = projection * view * model * vec4(aPos, 1.0f);
-	    ourColor = aColor;
-	    TexCoord = aTexCoord;
-	}
-	)");
-
-static std::string fragment(R"(
-	#version 330 core
-	out vec4 FragColor;
-
-	in vec3 ourColor;
-	in vec2 TexCoord;
-
-	uniform sampler2D ourTexture;
-
-	void main()
-	{
-	    FragColor = texture(ourTexture, TexCoord);
-	}
-	)");
+#include <utility>
 
 namespace One
 {
@@ -50,20 +15,26 @@ namespace One
 		float Texture;
 	};
 
-	template<int size>
-	static std::array<Vertex, size> generate_indices()
+	template<typename T, int size>
+	static std::array<T, size> generate_indices()
 	{
-		std::array<Vertex, size> array{};
+		std::array<T, size> array{};
 
-		// Process indices
+		int offset = 0;
+		for (int i = 0; i < size; i += 6) {
+			array[i] = offset + 0;
+			array[i + 1] = offset + 1;
+			array[i + 2] = offset + 3;
+
+			array[i + 3] = offset + 1;
+			array[i + 4] = offset + 2;
+			array[i + 5] = offset + 3;
+
+			offset += 4;
+		}
 
 		return array;
 	}
-
-	static u32 indices_[] = {  // note that we start from 0!
-		0, 1, 3,   // first triangle
-		1, 2, 3    // second triangle
-	};
 
 	static std::array<Vertex, 4> CreateQuad(float x, float y, float size, u32 id)
 	{
@@ -93,19 +64,60 @@ namespace One
 
 		return {v1, v2, v3, v4};
 	}
+
+	static std::string vertex(R"(
+	#version 330 core
+	layout (location = 0) in vec3 aPos;
+	layout (location = 1) in vec3 aColor;
+	layout (location = 2) in vec2 aTexCoord;
+
+	uniform mat4 model;
+	uniform mat4 view;
+	uniform mat4 projection;
+
+	out vec3 ourColor;
+	out vec2 TexCoord;
+
+	void main()
+	{
+	    gl_Position = projection * view * model * vec4(aPos, 1.0f);
+	    ourColor = aColor;
+	    TexCoord = aTexCoord;
+	}
+	)");
+
+	static std::string fragment(R"(
+	#version 330 core
+	out vec4 FragColor;
+
+	in vec3 ourColor;
+	in vec2 TexCoord;
+
+	uniform sampler2D ourTexture;
+
+	void main()
+	{
+	    FragColor = texture(ourTexture, TexCoord);
+	}
+	)");
 }
 
 
 One::Renderer2D::Renderer2D()
 {
-	auto quad = CreateQuad(10, 10, 100, 0);
-	Vertex vertices[4];
+//	auto quad = CreateQuad(10, 10, 100, 0);
+	auto ind = generate_indices<u32, 1000>();
 
-	memcpy(vertices, quad.data(), quad.size() * sizeof(Vertex));
+//	Vertex vertices[4];
+
+	u32 indices[1000];
+
+	memcpy(indices, ind.data(), ind.size() * sizeof(u32));
+//	memcpy(vertices, quad.data(), quad.size() * sizeof(Vertex));
 
 	m_VertexArray = GRAPHICS_FACTORY.CreateBufferArray();
 	m_VertexBuffer = GRAPHICS_FACTORY.CreateVertexBuffer(nullptr, sizeof(Vertex) * 1000, DrawStrategy::Dynamic);
-	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(indices_, sizeof(indices_), DrawStrategy::Dynamic);
+	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(indices, sizeof(indices), DrawStrategy::Dynamic);
 }
 
 One::RenderResource2D One::Renderer2D::CreateTexture2D()
@@ -113,7 +125,6 @@ One::RenderResource2D One::Renderer2D::CreateTexture2D()
 	auto texture = GRAPHICS_FACTORY.CreateTexture2D(One::TextureTypes::Texture2D, "../test.png");
 	u32 id = m_RenderingResourcesTexture.size();
 	m_RenderingResourcesTexture.push_back(texture);
-
 	return {id, RenderResource2D::Texture};
 }
 
@@ -123,7 +134,6 @@ One::RenderResource2D One::Renderer2D::CreateTexture2D(const std::string &name)
 	u32 id = m_RenderingResourcesTexture.size();
 	texture->LoadFromFile(name);
 	m_RenderingResourcesTexture.push_back(texture);
-
 	return {id, RenderResource2D::Texture};
 }
 
@@ -133,7 +143,6 @@ One::RenderResource2D One::Renderer2D::CreateTexture2D(const One::Image &image)
 	u32 id = m_RenderingResourcesTexture.size();
 	texture->LoadFromImage(image);
 	m_RenderingResourcesTexture.push_back(texture);
-
 	return {id, RenderResource2D::Texture};
 }
 
@@ -149,12 +158,30 @@ void One::Renderer2D::LoadTexture2D(One::RenderResource2D &resource, const std::
 
 One::RenderResource2D One::Renderer2D::CreateShape(One::Shapes shape)
 {
-	throw NotImplementedException();
+	RenderResource2D resource{};
+	resource.type = RenderResource2D::ResourceType::Shape;
+	resource.id = m_ShapeIndex;
+
+	auto quad = One::CreateQuad(0, 0, 10, 0);
+
+	Vertex shape_vertex[4];
+	memcpy(shape_vertex, quad.data(), quad.size() * sizeof(Vertex));
+
+	m_VertexBuffer->SubData(m_ShapeIndex * sizeof(shape_vertex), sizeof(shape_vertex), shape_vertex);
+
+	m_ShapeIndex++;
+
+	return resource;
 }
 
-void One::Renderer2D::ShapeMove(One::RenderResource2D resource, float x, float y)
+void One::Renderer2D::ShapePosition(One::RenderResource2D resource, float x, float y)
 {
-	throw NotImplementedException();
+	auto quad = One::CreateQuad(x, y, 10, 0);
+
+	Vertex shape_vertex[4];
+	memcpy(shape_vertex, quad.data(), quad.size() * sizeof(Vertex));
+
+	m_VertexBuffer->SubData(resource.id * sizeof(shape_vertex), sizeof(shape_vertex), shape_vertex);
 }
 
 void One::Renderer2D::ShapeRotate(One::RenderResource2D resource, float by)
@@ -177,18 +204,20 @@ void One::Renderer2D::SetCanvasTexture2D(One::RenderResource2D &resource)
 	throw NotImplementedException();
 }
 
-void One::Renderer2D::BeginBatch()
+void One::Renderer2D::BeginBatch(std::shared_ptr<Camera> camera, std::shared_ptr<ShaderProgram> shader)
 {
-	throw NotImplementedException();
+	m_Camera = std::move(camera);
+	m_Shader = std::move(shader);
+	m_ProjectionMatrix = m_Camera->GetProjection(1280, 720);
+	m_ViewMatrix = m_Camera->GetView();
 }
 
-void One::Renderer2D::DrawShape(One::RenderResource2D &resource, One::RenderResource2D &texture)
-{
-	if (resource.type != RenderResource2D::Shape || texture.type != RenderResource2D::Texture)
-		throw GraphicsFunctionError();
-
-
-}
+//void One::Renderer2D::DrawShape(One::RenderResource2D &resource, One::RenderResource2D &texture)
+//{
+//	if (resource.type != RenderResource2D::Shape || texture.type != RenderResource2D::Texture)
+//		throw GraphicsFunctionError();
+//
+//}
 
 void One::Renderer2D::EndBatch()
 {
@@ -197,7 +226,13 @@ void One::Renderer2D::EndBatch()
 
 void One::Renderer2D::FlushBatch()
 {
-	throw NotImplementedException();
+	glm::mat4 model = glm::mat4(1.0f);
+
+	m_Shader->Use();
+	m_Shader->AddUniformMat4x4("view", m_ViewMatrix);
+	m_Shader->AddUniformMat4x4("projection", m_ProjectionMatrix);
+	m_Shader->AddUniformMat4x4("model", model);
+	GRAPHICS_COMMANDS->DrawElements(m_VertexArray, m_VertexArray->GetPrimitive());
 }
 
 void One::Renderer2D::SwapBuffer()
