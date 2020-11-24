@@ -64,60 +64,40 @@ namespace One
 
 		return {v1, v2, v3, v4};
 	}
-
-	static std::string vertex(R"(
-	#version 330 core
-	layout (location = 0) in vec3 aPos;
-	layout (location = 1) in vec3 aColor;
-	layout (location = 2) in vec2 aTexCoord;
-
-	uniform mat4 model;
-	uniform mat4 view;
-	uniform mat4 projection;
-
-	out vec3 ourColor;
-	out vec2 TexCoord;
-
-	void main()
-	{
-	    gl_Position = projection * view * model * vec4(aPos, 1.0f);
-	    ourColor = aColor;
-	    TexCoord = aTexCoord;
-	}
-	)");
-
-	static std::string fragment(R"(
-	#version 330 core
-	out vec4 FragColor;
-
-	in vec3 ourColor;
-	in vec2 TexCoord;
-
-	uniform sampler2D ourTexture;
-
-	void main()
-	{
-	    FragColor = texture(ourTexture, TexCoord);
-	}
-	)");
 }
 
 
 One::Renderer2D::Renderer2D()
 {
-//	auto quad = CreateQuad(10, 10, 100, 0);
 	auto ind = generate_indices<u32, 1000>();
-
-//	Vertex vertices[4];
 
 	u32 indices[1000];
 
 	memcpy(indices, ind.data(), ind.size() * sizeof(u32));
-//	memcpy(vertices, quad.data(), quad.size() * sizeof(Vertex));
 
 	m_VertexArray = GRAPHICS_FACTORY.CreateBufferArray();
 	m_VertexBuffer = GRAPHICS_FACTORY.CreateVertexBuffer(nullptr, sizeof(Vertex) * 1000, DrawStrategy::Dynamic);
 	m_IndexBuffer = GRAPHICS_FACTORY.CreateIndexBuffer(indices, sizeof(indices), DrawStrategy::Dynamic);
+
+	m_Texture = One::texture_ptr(GRAPHICS_FACTORY.CreateTexture2D(
+		One::TextureTypes::Texture2D, "../test2.png"));
+
+	m_VertexArray->AddAttribute(3, One::ShaderTypes::Float, sizeof(Vertex),
+	                            0, false);
+
+	m_VertexArray->AddAttribute(4, One::ShaderTypes::Float, sizeof(Vertex),
+	                            offsetof(Vertex, Colour), false);
+
+	m_VertexArray->AddAttribute(2, One::ShaderTypes::Float, sizeof(Vertex),
+	                            offsetof(Vertex, TextureCoordinates), false);
+
+	m_VertexArray->AddAttribute(1, One::ShaderTypes::Float, sizeof(Vertex),
+	                            offsetof(Vertex, Texture), false);
+
+	m_VertexArray->Add(m_VertexBuffer);
+	m_VertexArray->Add(m_IndexBuffer);
+	m_VertexArray->Add(m_Texture);
+	m_VertexArray->SetPrimitive(One::Primitives::Triangles);
 }
 
 One::RenderResource2D One::Renderer2D::CreateTexture2D()
@@ -170,7 +150,6 @@ One::RenderResource2D One::Renderer2D::CreateShape(One::Shapes shape)
 	m_VertexBuffer->SubData(m_ShapeIndex * sizeof(shape_vertex), sizeof(shape_vertex), shape_vertex);
 
 	m_ShapeIndex++;
-
 	return resource;
 }
 
@@ -244,3 +223,5 @@ void One::Renderer2D::ClearBuffer()
 {
 	GRAPHICS_COMMANDS->Clear(0, 0, 0);
 }
+
+

@@ -5,6 +5,7 @@
 #include <Application/Application.h>
 #include <Graphics/Buffers.h>
 #include <Renderer/Camera.h>
+#include <Renderer/Renderer2D.h>
 
 class TestGame : public One::Application
 {
@@ -23,7 +24,11 @@ private:
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	std::shared_ptr<One::Camera> m_Camera;
+
+	std::shared_ptr<One::Renderer2D> m_TestRenderer;
 	float x = 0, y = 0;
+
+	One::RenderResource2D shape;
 };
 
 

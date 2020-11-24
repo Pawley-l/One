@@ -108,6 +108,7 @@ namespace One
 		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 		std::shared_ptr<Camera> m_Camera;
 		std::shared_ptr<ShaderProgram> m_Shader;
+		std::shared_ptr<One::Texture> m_Texture;
 		glm::mat4 m_ProjectionMatrix{};
 		glm::mat4 m_ViewMatrix{};
 		u32 m_ShapeIndex = 0;
